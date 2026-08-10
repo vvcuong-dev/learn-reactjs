@@ -1,13 +1,10 @@
-import Avatar from "./avatar.component";
-import MemberInfo from "./member-infor.component";
-import Comment from "./comment.component";
-
-function Member() {
+function Member(props) {
   return (
     <div className="member">
-      <Avatar />
-      <MemberInfo />
-      <Comment />
+      <h2>Member Name: {props.name}</h2>
+      <p>Tuổi: {props.age}</p>
+      <p>Địa chỉ giao hàng: {props["shipping-address"]}</p>
+      {props.comment}
     </div>
   );
 }

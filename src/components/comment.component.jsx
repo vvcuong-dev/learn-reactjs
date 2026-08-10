@@ -1,7 +1,8 @@
-function Comment() {
+function Comment(props) {
   return (
     <div className="comment">
-      <p>This is a comment. hello!</p>
+      <h3 style={{ color: "blue" }}>{props.title}</h3>
+      <p style={{ color: "green" }}>{props.content}</p>
     </div>
   );
 }
