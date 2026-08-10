@@ -1,6 +1,6 @@
 import "./App.css";
-import Member from "./components/member.component";
 import Comment from "./components/comment.component";
+import Member from "./components/member.component";
 
 /**
  * 1. Render có điều kiện
@@ -11,33 +11,54 @@ import Comment from "./components/comment.component";
  */
 
 function App() {
-  return (
-    <>
-      <Member
-        name="Cuong Vu"
-        age={22}
-        shipping-address="123 Main St"
-        comment={
-          <Comment
-            content="Online learning is the future of education !"
-            title="Comment by Cuong Vu"
-          />
-        }
-      />
+  const members = [
+    {
+      name: "Cuong Vu",
+      age: 22,
+      shippingAddress: "123 Main St",
+      comment: {
+        title: "This is cuong's comment",
+        content: "This is cuong's comment content",
+      },
+    },
+    {
+      name: "Nguyen Van A",
+      age: 24,
+      shippingAddress: "456 Elm St",
+      comment: {
+        title: "This is A's comment",
+        content: "This is A's comment content",
+      },
+    },
+    {
+      name: "Le Thi B",
+      age: 30,
+      shippingAddress: "789 Oak St",
+      comment: {
+        title: "This is B's comment",
+        content: "This is B's comment content",
+      },
+    },
+  ];
 
+  const memberList = members.map((member, index) => {
+    return (
       <Member
-        name="Nguyễn Văn A"
-        age={24}
-        shipping-address="Hồ Chí Minh"
+        key={index}
+        name={member.name}
+        age={member.age}
+        shippingAddress={member.shippingAddress}
         comment={
           <Comment
-            content="Online learning is the future of education !"
-            title="Comment by Nguyễn Văn A"
+            title={member.comment.title}
+            content={member.comment.content}
           />
         }
       />
-    </>
-  );
+    );
+  });
+
+  return <>{memberList}</>;
 }
 
 export default App;
