@@ -32,3 +32,20 @@ Lưu ý:
 - Bạn có thể truyền dữ liệu từ sự kiện về component cha thông qua callback function. Ví dụ, bạn có thể truyền một hàm từ component cha vào component con và gọi hàm đó khi sự kiện xảy ra trong component con.
 
 Kết luận: Sự kiện trong React là một phần quan trọng giúp bạn tương tác với người dùng và thực hiện các hành động dựa trên các sự kiện đó. Hiểu rõ cách sử dụng sự kiện sẽ giúp bạn xây dựng các ứng dụng React tương tác và linh hoạt hơn.
+
+3. State trong React
+
+Mục đích: State trong React giúp bạn quản lý dữ liệu động trong component. Nó cho phép bạn lưu trữ và cập nhật dữ liệu mà có thể thay đổi theo thời gian, từ đó làm cho giao diện người dùng phản ứng với các thay đổi đó.
+
+Đặc điểm:
+
+- State là một đối tượng (object) chứa các thuộc tính đại diện cho dữ liệu động của component.
+- State có thể được thay đổi thông qua phương thức setState (trong class component) hoặc hook useState (trong functional component).
+- Khi state thay đổi, React sẽ tự động render lại component để phản ánh các thay đổi đó trên giao diện người dùng.
+- State chỉ tồn tại trong component mà nó được định nghĩa, và không thể được truy cập trực tiếp từ các component khác. Nếu bạn cần chia sẻ state giữa các component, hãy sử dụng props hoặc các giải pháp quản lý state như Context API hoặc Redux.
+
+Lưu ý:
+
+- State không nên được thay đổi trực tiếp. Thay vào đó, hãy sử dụng setState hoặc hook useState để cập nhật state. Việc thay đổi state trực tiếp có thể dẫn đến các vấn đề về hiệu suất và không đảm bảo rằng React sẽ render lại component đúng cách.
+
+Kết luận: State là một phần quan trọng trong React, giúp bạn quản lý dữ liệu động và làm cho giao diện người dùng phản ứng với các thay đổi đó. Hiểu rõ cách sử dụng state sẽ giúp bạn xây dựng các ứng dụng React linh hoạt và tương tác hơn.
