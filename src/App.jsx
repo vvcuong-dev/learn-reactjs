@@ -20,6 +20,20 @@ function App() {
         title: "This is cuong's comment",
         content: "This is cuong's comment content",
       },
+      posts: [
+        {
+          title: "Post 1",
+          content: "This is the content of post 1",
+        },
+        {
+          title: "Post 2",
+          content: "This is the content of post 2",
+        },
+        {
+          title: "Post 3",
+          content: "This is the content of post 3",
+        },
+      ],
     },
     {
       name: "Nguyen Van A",
@@ -29,15 +43,20 @@ function App() {
         title: "This is A's comment",
         content: "This is A's comment content",
       },
-    },
-    {
-      name: "Le Thi B",
-      age: 30,
-      shippingAddress: "789 Oak St",
-      comment: {
-        title: "This is B's comment",
-        content: "This is B's comment content",
-      },
+      posts: [
+        {
+          title: "Post 4",
+          content: "This is the content of post 4",
+        },
+        {
+          title: "Post 5",
+          content: "This is the content of post 5",
+        },
+        {
+          title: "Post 6",
+          content: "This is the content of post 6",
+        },
+      ],
     },
   ];
 
@@ -54,6 +73,7 @@ function App() {
             content={member.comment.content}
           />
         }
+        posts={member.posts}
       />
     );
   });
