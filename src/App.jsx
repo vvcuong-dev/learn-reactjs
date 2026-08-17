@@ -1,6 +1,7 @@
 import "./App.css";
 import Customer from "./components/state/customer.state";
 import Counter from "./components/state/counter.state";
+import Toggle from "./components/state/toggle.state";
 
 const customerInfo = {
   name: "John Doe",
@@ -14,6 +15,8 @@ function App() {
       <Customer info={customerInfo} />
 
       <Counter count={0} />
+
+      <Toggle />
     </>
   );
 }
