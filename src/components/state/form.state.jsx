@@ -10,6 +10,7 @@ export class Form extends React.Component {
         name: "",
         email: "",
       },
+      errors: {},
     };
   }
 
@@ -28,13 +29,40 @@ export class Form extends React.Component {
   handleSubmitForm = (e) => {
     e.preventDefault();
     const { name, email } = this.state.form;
-    console.log("Form submitted:", { name, email });
+
+    const errors = {};
+
+    if (!name) {
+      errors.form = "Please fill in the name field.";
+    }
+
+    if (!email) {
+      errors.email = "Please fill in the email field.";
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    this.setState({ errors: errors });
+
+    if (Object.keys(errors).length === 0) {
+      console.log("Form submitted:", { name, email });
+
+      this.setState({
+        form: {
+          name: "",
+          email: "",
+        },
+      });
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <>
-        <h1 className="container">
+        <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-6">
               <form onSubmit={this.handleSubmitForm}>
@@ -47,7 +75,11 @@ export class Form extends React.Component {
                     id="name"
                     placeholder="Enter your name"
                     onChange={this.handleChangeValue}
+                    value={this.state.form.name}
                   />
+                  {errors.form && (
+                    <div className="text-danger">{errors.form}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
@@ -58,7 +90,11 @@ export class Form extends React.Component {
                     id="email"
                     placeholder="Enter your email"
                     onChange={this.handleChangeValue}
+                    value={this.state.form.email}
                   />
+                  {errors.email && (
+                    <div className="text-danger">{errors.email}</div>
+                  )}
                 </div>
                 <button type="submit" className="btn btn-primary">
                   Submit
@@ -66,7 +102,7 @@ export class Form extends React.Component {
               </form>
             </div>
           </div>
-        </h1>
+        </div>
       </>
     );
   }
