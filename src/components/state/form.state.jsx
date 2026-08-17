@@ -1,5 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Validate from "./validate";
+
+const validate = new Validate();
 
 export class Form extends React.Component {
   constructor() {
@@ -7,103 +10,93 @@ export class Form extends React.Component {
 
     this.state = {
       form: {
-        name: "",
         email: "",
+        password: "",
       },
       errors: {},
     };
   }
 
   handleChangeValue = (e) => {
-    const data = { ...this.state.form };
-    data[e.target.name] = e.target.value;
-
+    const { name, value } = e.target;
     this.setState((prevState) => ({
       form: {
         ...prevState.form,
-        ...data, // nghĩa là data sẽ ghi đè lên các giá trị cũ trong prevState.form nếu có cùng key, còn nếu không có thì sẽ thêm mới key-value vào prevState.form
+        [name]: value,
       },
     }));
   };
 
   handleSubmitForm = (e) => {
     e.preventDefault();
-    const { name, email } = this.state.form;
 
-    const errors = {};
+    const rules = {
+      email: "required|email",
+      password: "required|min:6",
+    };
 
-    if (!name) {
-      errors.form = "Please fill in the name field.";
-    }
+    const messages = {
+      "email.required": "Email is required",
+      "email.email": "Email is invalid",
+      "password.required": "Password is required",
+      "password.min": "Password must be at least 6 characters",
+    };
 
-    if (!email) {
-      errors.email = "Please fill in the email field.";
-    }
+    const isValid = validate.run(this.state.form, rules, messages);
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = "Please enter a valid email address.";
-    }
+    this.setState({ errors: validate.errors });
 
-    this.setState({ errors: errors });
-
-    if (Object.keys(errors).length === 0) {
-      console.log("Form submitted:", { name, email });
-
-      this.setState({
-        form: {
-          name: "",
-          email: "",
-        },
-      });
+    if (isValid) {
+      console.log("Form submitted:", this.state.form);
     }
   };
 
   render() {
-    const { errors } = this.state;
+    const { form, errors } = this.state;
     return (
-      <>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6">
-              <form onSubmit={this.handleSubmitForm}>
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    id="name"
-                    placeholder="Enter your name"
-                    onChange={this.handleChangeValue}
-                    value={this.state.form.name}
-                  />
-                  {errors.form && (
-                    <div className="text-danger">{errors.form}</div>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    onChange={this.handleChangeValue}
-                    value={this.state.form.email}
-                  />
-                  {errors.email && (
-                    <div className="text-danger">{errors.email}</div>
-                  )}
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </form>
-            </div>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <form onSubmit={this.handleSubmitForm}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  onChange={this.handleChangeValue}
+                  value={form.email}
+                />
+                {errors.email && (
+                  <div className="text-danger">{errors.email}</div>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  onChange={this.handleChangeValue}
+                  value={form.password}
+                />
+                {errors.password && (
+                  <div className="text-danger">{errors.password}</div>
+                )}
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
