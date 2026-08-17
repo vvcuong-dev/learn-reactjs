@@ -1,5 +1,6 @@
 import "./App.css";
 import Customer from "./components/state/customer.state";
+import Counter from "./components/state/counter.state";
 
 const customerInfo = {
   name: "John Doe",
@@ -11,6 +12,8 @@ function App() {
     <>
       <h1>State of react</h1>
       <Customer info={customerInfo} />
+
+      <Counter count={0} />
     </>
   );
 }

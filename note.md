@@ -47,5 +47,6 @@ Mục đích: State trong React giúp bạn quản lý dữ liệu động trong
 Lưu ý:
 
 - State không nên được thay đổi trực tiếp. Thay vào đó, hãy sử dụng setState hoặc hook useState để cập nhật state. Việc thay đổi state trực tiếp có thể dẫn đến các vấn đề về hiệu suất và không đảm bảo rằng React sẽ render lại component đúng cách.
+- Sử dụng callback function khi cập nhật state dựa trên giá trị hiện tại của state. Điều này giúp tránh các vấn đề liên quan đến việc cập nhật state không đồng bộ. nhớ có prevState (giá trị state trước khi cập nhật) khi sử dụng setState trong class component hoặc callback function trong useState hook.
 
 Kết luận: State là một phần quan trọng trong React, giúp bạn quản lý dữ liệu động và làm cho giao diện người dùng phản ứng với các thay đổi đó. Hiểu rõ cách sử dụng state sẽ giúp bạn xây dựng các ứng dụng React linh hoạt và tương tác hơn.
