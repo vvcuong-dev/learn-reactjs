@@ -1,10 +1,12 @@
 import "./App.css";
-import Form from "./components/state/form.state";
+import Users from "./components/lifecycle/user";
+// import Form from "./components/state/form.state";
 
 function App() {
   return (
     <>
-      <Form />
+      <Users />
+      {/* <Form /> */}
     </>
   );
 }

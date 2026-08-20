@@ -50,3 +50,104 @@ Lưu ý:
 - Sử dụng callback function khi cập nhật state dựa trên giá trị hiện tại của state. Điều này giúp tránh các vấn đề liên quan đến việc cập nhật state không đồng bộ. nhớ có prevState (giá trị state trước khi cập nhật) khi sử dụng setState trong class component hoặc callback function trong useState hook.
 
 Kết luận: State là một phần quan trọng trong React, giúp bạn quản lý dữ liệu động và làm cho giao diện người dùng phản ứng với các thay đổi đó. Hiểu rõ cách sử dụng state sẽ giúp bạn xây dựng các ứng dụng React linh hoạt và tương tác hơn.
+
+4. Vòng đời Component trong React
+
+Mục đích: Vòng đời component trong React giúp bạn quản lý các giai đoạn khác nhau của một component, từ khi nó được tạo ra, cập nhật, cho đến khi nó bị hủy. Điều này cho phép bạn thực hiện các hành động cụ thể tại các thời điểm khác nhau trong vòng đời của component.
+
+Đặc điểm:
+
+- Vòng đời component trong React được chia thành ba giai đoạn chính: Mounting (gắn kết), Updating (cập nhật), và Unmounting (hủy bỏ).
+- Trong class component, bạn có thể sử dụng các phương thức vòng đời như componentDidMount, componentDidUpdate, và componentWillUnmount để thực hiện các hành động tại các giai đoạn khác nhau.
+- Trong functional component, bạn có thể sử dụng hook useEffect để thực hiện các hành động tương tự. useEffect có thể được cấu hình để chạy sau khi component được render, sau khi state hoặc props thay đổi, hoặc trước khi component bị hủy.
+- Lưu ý:
+- Khi sử dụng useEffect, bạn có thể truyền vào một mảng phụ thuộc (dependency array) để xác định khi nào effect sẽ được chạy lại. Nếu mảng phụ thuộc rỗng, effect sẽ chỉ chạy một lần sau khi component được render lần đầu. Nếu bạn truyền vào các giá trị trong mảng phụ thuộc, effect sẽ chạy lại mỗi khi các giá trị đó thay đổi.
+- Hãy cẩn thận khi sử dụng useEffect để tránh các vấn đề về hiệu suất và vòng lặp vô hạn. Đảm bảo rằng bạn chỉ thực hiện các hành động cần thiết trong effect và dọn dẹp (cleanup) các tài nguyên khi component bị hủy.
+- Kết luận: Hiểu rõ vòng đời component trong React sẽ giúp bạn quản lý các giai đoạn khác nhau của một component một cách hiệu quả, từ đó xây dựng các ứng dụng React linh hoạt và tối ưu hơn.
+
+# Mouting (Gắn kết)
+
+- Mục đích: Giai đoạn Mounting trong vòng đời component của React là quá trình khi một component được tạo ra và gắn kết vào cây DOM. Trong giai đoạn này, bạn có thể thực hiện các hành động như khởi tạo state, thiết lập các tài nguyên cần thiết, hoặc thực hiện các thao tác DOM.
+
+Đặc điểm:
+
+- Giai đoạn Mounting bao gồm các phương thức vòng đời sau trong class component: constructor, static getDerivedStateFromProps, render, và componentDidMount.
+- Trong functional component, bạn có thể sử dụng hook useEffect với mảng phụ thuộc rỗng để thực hiện các hành động sau khi component được render lần đầu.
+- Lưu ý:
+- Trong giai đoạn Mounting, bạn nên tránh thực hiện các thao tác DOM trực tiếp trong constructor hoặc render. Thay vào đó, hãy sử dụng componentDidMount hoặc useEffect để thực hiện các thao tác DOM sau khi component đã được gắn kết vào cây DOM.
+- Khi sử dụng useEffect trong functional component, hãy đảm bảo rằng bạn chỉ thực hiện các hành động cần thiết và dọn dẹp các tài nguyên khi component bị hủy để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+- Kết luận: Giai đoạn Mounting là một phần quan trọng trong vòng đời component của React, giúp bạn quản lý các hành động cần thiết khi một component được tạo ra và gắn kết vào cây DOM. Hiểu rõ giai đoạn này sẽ giúp bạn xây dựng các ứng dụng React hiệu quả và tối ưu hơn.
+
+# Updating (Cập nhật)
+
+- Mục đích: Giai đoạn Updating trong vòng đời component của React là quá trình khi một component được cập nhật do thay đổi state hoặc props. Trong giai đoạn này, bạn có thể thực hiện các hành động như kiểm tra các giá trị mới, cập nhật giao diện người dùng, hoặc thực hiện các thao tác DOM dựa trên các thay đổi đó.
+
+Đặc điểm:
+
+- Giai đoạn Updating bao gồm các phương thức vòng đời sau trong class component: static getDerivedStateFromProps, shouldComponentUpdate, render, getSnapshotBeforeUpdate, và componentDidUpdate.
+- Trong functional component, bạn có thể sử dụng hook useEffect với mảng phụ thuộc chứa các giá trị state hoặc props mà bạn muốn theo dõi để thực hiện các hành động khi chúng thay đổi.
+- Lưu ý:
+- Trong giai đoạn Updating, bạn nên tránh thực hiện các thao tác DOM trực tiếp trong render. Thay vào đó, hãy sử dụng componentDidUpdate hoặc useEffect để thực hiện các thao tác DOM sau khi component đã được cập nhật.
+- Khi sử dụng useEffect trong functional component, hãy đảm bảo rằng bạn chỉ thực hiện các hành động cần thiết và dọn dẹp các tài nguyên khi component bị hủy để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+- Kết luận: Giai đoạn Updating là một phần quan trọng trong vòng đời component của React, giúp bạn quản lý các hành động cần thiết khi một component được cập nhật do thay đổi state hoặc props. Hiểu rõ giai đoạn này sẽ giúp bạn xây dựng các ứng dụng React hiệu quả và tối ưu hơn.
+
+# Unmounting (Hủy bỏ)
+
+- Mục đích: Giai đoạn Unmounting trong vòng đời component của React là quá trình khi một component bị hủy bỏ và gỡ khỏi cây DOM. Trong giai đoạn này, bạn có thể thực hiện các hành động như dọn dẹp tài nguyên, hủy các sự kiện, hoặc lưu trữ dữ liệu trước khi component bị hủy.
+
+Đặc điểm:
+
+- Giai đoạn Unmounting bao gồm phương thức vòng đời componentWillUnmount trong class component.
+- Trong functional component, bạn có thể sử dụng hook useEffect với một hàm dọn dẹp (cleanup function) để thực hiện các hành động trước khi component bị hủy.
+- Lưu ý:
+- Trong giai đoạn Unmounting, bạn nên đảm bảo rằng bạn dọn dẹp tất cả các tài nguyên, hủy các sự kiện, và lưu trữ dữ liệu cần thiết trước khi component bị hủy để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+- Khi sử dụng useEffect trong functional component, hãy đảm bảo rằng bạn chỉ thực hiện các hành động cần thiết trong hàm dọn dẹp và tránh thực hiện các thao tác DOM trực tiếp trong hàm dọn dẹp để đảm bảo rằng component được hủy bỏ một cách an toàn và hiệu quả.
+- Kết luận: Giai đoạn Unmounting là một phần quan trọng trong vòng đời component của React, giúp bạn quản lý các hành động cần thiết khi một component bị hủy bỏ và gỡ khỏi cây DOM. Hiểu rõ giai đoạn này sẽ giúp bạn xây dựng các ứng dụng React hiệu quả và tối ưu hơn, đồng thời tránh các vấn đề về rò rò bộ nhớ và hiệu suất.
+
+# constructor(props) - Mounting
+
+- được gọi khi một thể hiện của component được tạo ra. Nó thường được sử dụng để khởi tạo state và bind các phương thức của component.
+- Có thể dùng để nhận props từ component cha và thiết lập state ban đầu dựa trên các giá trị đó.
+- Nếu phải cài đặt hàm này thì khai báo nó với từ khóa constructor(props) và gọi super(props) để đảm bảo rằng component được khởi tạo đúng cách.
+- Nếu không làm gì trong constructor, bạn có thể bỏ qua việc khai báo nó và React sẽ tự động tạo ra một constructor mặc định.
+
+# componentWillMount() - Mounting
+
+- được gọi trước khi component được render lần đầu tiên. Tuy nhiên, phương thức này đã bị loại bỏ trong React 16 và không nên sử dụng nữa.
+- dùng để đăng ký các sự kiện hoặc thực hiện các thao tác chuẩn bị trước khi component được render.
+- Dựa vào các props để tính toán và thiết lập state ban đầu cho component.
+- Tuy nhiên, vì nó đã bị loại bỏ, bạn nên sử dụng componentDidMount() hoặc useEffect() trong functional component để thực hiện các thao tác này.
+
+# render() - Mounting và Updating
+
+- hàm này bắt buộc phải có trong class component và được gọi để render giao diện người dùng của component. Nó trả về một cây JSX hoặc React elements.
+- Trong functional component, bạn không cần định nghĩa hàm render() vì toàn bộ hàm component chính là hàm render. Bạn chỉ cần trả về JSX từ hàm component.
+- render() được gọi mỗi khi state hoặc props của component thay đổi, và React sẽ tự động cập nhật giao diện người dùng dựa trên các thay đổi đó.
+- Trong render(), bạn nên tránh thực hiện các thao tác DOM trực tiếp hoặc các tác vụ tốn thời gian, vì điều này có thể làm giảm hiệu suất của ứng dụng. Thay vào đó, hãy sử dụng các phương thức vòng đời khác như componentDidMount() hoặc useEffect() để thực hiện các thao tác này sau khi component đã được render.
+
+# componentDidMount() - Mounting
+
+- được gọi ngay sau khi component được render lần đầu tiên và gắn kết vào cây DOM. Đây là nơi lý tưởng để thực hiện các thao tác như gọi API, đăng ký sự kiện, hoặc thiết lập các tài nguyên cần thiết cho component.
+- Sau khi fetch dữ liệu từ API hoặc thực hiện các thao tác bất đồng bộ, bạn có thể tương tác với DOM bằng JS hoặc cập nhật state để render lại component với dữ liệu mới.
+- Trong functional component, bạn có thể sử dụng hook useEffect với mảng phụ thuộc rỗng để thực hiện các thao tác này sau khi component được render lần đầu tiên.
+- componentDidMount() chỉ được gọi một lần trong vòng đời của component, vì vậy bạn có thể yên tâm rằng các thao tác trong phương thức này sẽ chỉ được thực hiện một lần khi component được tạo ra và gắn kết vào cây DOM. Điều này giúp tránh việc thực hiện các thao tác không cần thiết nhiều lần và cải thiện hiệu suất của ứng dụng.
+
+# ComponentWillReceiveProps(nextProps) - Updating
+
+- hàm này được chạy khi mà props của component đã được sinh ra có sự thay đổi. Phải gọi setState để cập nhật state mới dựa trên props mới. Tuy nhiên, phương thức này đã bị loại bỏ trong React 16 và không nên sử dụng nữa.
+
+# shouldComponentUpdate(nextProps, nextState) - Updating
+
+- được gọi trước khi render() để xác định xem component có cần render lại hay không. Nó nhận vào nextProps và nextState, và trả về true hoặc false. Nếu trả về false, component sẽ không render lại, giúp tối ưu hiệu suất.
+
+# componentWillUpdate(nextProps, nextState) - Updating
+
+- Được gọi ngay sau shouldComponentUpdate() nếu hàm này trả về true. Không gọi setState trong hàm này bởi hàm này là để chuẩn bị update cho đối tượng chứ không phải tạo ra 1 update mới, sẽ tạo ra vòng lặp vô hạn. Phương thức này đã bị loại bỏ trong React 16 và không nên sử dụng nữa.
+
+# componentDidUpdate(prevProps, prevState, snapshot) - Updating
+
+- được gọi ngay sau render() từ lần render thứ hai trở đi (nghĩa là sau khi component đã được cập nhật). Đây là nơi lý tưởng để thực hiện các thao tác dựa trên props hoặc state mới, như cập nhật DOM hoặc gọi API. Bạn có thể so sánh prevProps và prevState với props và state hiện tại để xác định xem có cần thực hiện các hành động nào không.
+
+# componentWillUnmount() - Unmounting
+
+- được gọi ngay trước khi component bị hủy bỏ và gỡ khỏi cây DOM. Đây là nơi lý tưởng để dọn dẹp các tài nguyên, hủy các sự kiện, hoặc lưu trữ dữ liệu cần thiết trước khi component bị hủy. Bạn nên đảm bảo rằng bạn dọn dẹp tất cả các tài nguyên và hủy các sự kiện để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
