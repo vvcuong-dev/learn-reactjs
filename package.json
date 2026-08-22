@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"pnpm vite\" \"json-server --watch server/db.json --port 3000\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -12,6 +12,7 @@
   "dependencies": {
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.8",
+    "concurrently": "^10.0.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "sass": "^1.102.0"
