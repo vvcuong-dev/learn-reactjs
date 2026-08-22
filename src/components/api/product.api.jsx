@@ -1,6 +1,7 @@
 import React from "react";
 import config from "../../config.json";
 import ProductDetail from "./product-detail";
+import ProductAdd from "./product-add";
 
 const { SERVER_API } = config;
 
@@ -34,6 +35,12 @@ export class Product extends React.Component {
     this.setState({ productId: null });
   };
 
+  handleAddSuccess = (status) => {
+    if (status) {
+      this.getProducts();
+      alert("Tạo sản phẩm thành công");
+    }
+  };
   componentDidMount() {
     this.getProducts();
   }
@@ -42,6 +49,7 @@ export class Product extends React.Component {
     const { products, isLoading, productId } = this.state;
     return (
       <div>
+        <ProductAdd onSuccess={this.handleAddSuccess} />
         {isLoading ? (
           <p>Loading...</p>
         ) : productId ? (

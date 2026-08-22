@@ -1,19 +1,44 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Product 1",
       "price": 10.99
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Product 2",
       "price": 19.99
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Product 3",
       "price": 5.99
+    },
+    {
+      "id": "4",
+      "name": "Tour trong nước",
+      "price": "123"
+    },
+    {
+      "id": "5",
+      "name": "Nồi cơm điện",
+      "price": "1000"
+    },
+    {
+      "id": "6",
+      "name": "chảo chớp",
+      "price": "200"
+    },
+    {
+      "name": "áo choàng tím",
+      "price": "600",
+      "id": "15wqf1p47MM"
+    },
+    {
+      "name": "Tour Hạ Long ",
+      "price": "133",
+      "id": "d34nTVsmaw4"
     }
   ]
 }
