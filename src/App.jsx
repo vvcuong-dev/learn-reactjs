@@ -1,12 +1,11 @@
 import "./App.css";
-import Users from "./components/lifecycle/user";
-// import Form from "./components/state/form.state";
+import Product from "./components/api/product.api";
 
 function App() {
   return (
     <>
-      <Users />
-      {/* <Form /> */}
+      <h1>API ReactJS</h1>
+      <Product />
     </>
   );
 }
