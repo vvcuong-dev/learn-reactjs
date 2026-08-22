@@ -1,5 +1,6 @@
 import React from "react";
 import config from "../../config.json";
+import ProductDetail from "./product-detail";
 
 const { SERVER_API } = config;
 
@@ -10,6 +11,7 @@ export class Product extends React.Component {
     this.state = {
       products: [],
       isLoading: true,
+      productId: null,
     };
   }
 
@@ -24,25 +26,47 @@ export class Product extends React.Component {
     }
   };
 
+  handleClickProduct = (id) => {
+    this.setState({ productId: id });
+  };
+
+  handleBack = () => {
+    this.setState({ productId: null });
+  };
+
   componentDidMount() {
     this.getProducts();
   }
 
   render() {
-    const { products, isLoading } = this.state;
+    const { products, isLoading, productId } = this.state;
     return (
       <div>
-        <h2 style={{ color: "blue" }}>List of Products</h2>
         {isLoading ? (
           <p>Loading...</p>
+        ) : productId ? (
+          <>
+            <ProductDetail id={productId} />
+            <button onClick={this.handleBack}>I'm backk</button>
+          </>
         ) : (
-          products.map((product) => (
-            <div key={product.id}>
-              <p>
-                {product.name} - ${product.price}
-              </p>
-            </div>
-          ))
+          <>
+            <h2>Danh sách sản phẩm</h2>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                onClick={() => this.handleClickProduct(product.id)}
+                style={{
+                  cursor: "pointer",
+                  marginBottom: "10px",
+                }}
+              >
+                <p>
+                  {product.name} - ${product.price}
+                </p>
+              </div>
+            ))}
+          </>
         )}
       </div>
     );
