@@ -1,14 +1,11 @@
 import "./App.css";
-import Product from "./components/api/product.api";
-import { getUser } from "./ultis/user.util";
+import UserComponent from "./components/user.component";
 
 function App() {
-  console.log(getUser());
-
   return (
     <>
-      <h1>API ReactJS</h1>
-      <Product />
+      <h1>App Component - My App</h1>
+      <UserComponent />
     </>
   );
 }

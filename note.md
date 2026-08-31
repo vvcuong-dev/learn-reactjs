@@ -151,3 +151,19 @@ Mục đích: Vòng đời component trong React giúp bạn quản lý các gia
 # componentWillUnmount() - Unmounting
 
 - được gọi ngay trước khi component bị hủy bỏ và gỡ khỏi cây DOM. Đây là nơi lý tưởng để dọn dẹp các tài nguyên, hủy các sự kiện, hoặc lưu trữ dữ liệu cần thiết trước khi component bị hủy. Bạn nên đảm bảo rằng bạn dọn dẹp tất cả các tài nguyên và hủy các sự kiện để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+
+5. React Hooks
+
+Mục đích: React Hooks là các hàm đặc biệt được giới thiệu trong React 16.8, cho phép bạn sử dụng state và các tính năng khác của React mà không cần viết class component. Hooks giúp bạn viết code ngắn gọn, dễ đọc và dễ bảo trì hơn.
+
+Đặc điểm:
+
+- Hooks chỉ có thể được sử dụng trong functional component hoặc custom hook. Bạn không thể sử dụng hooks trong class component hoặc các hàm thông thường.
+- React cung cấp một số hooks cơ bản như useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, v.v. Mỗi hook có một mục đích và cách sử dụng riêng, giúp bạn quản lý state, side effects, context, và các tính năng khác của React một cách hiệu quả.
+- Hooks cho phép bạn tách logic liên quan đến state và side effects ra khỏi component, giúp code trở nên dễ đọc và dễ bảo trì hơn. Bạn có thể tạo custom hook để tái sử dụng logic giữa các component khác nhau
+
+Lưu ý: React Hooks có một số quy tắc quan trọng mà bạn cần tuân thủ:
+
+- Hooks chỉ có thể được gọi ở cấp độ trên cùng của component hoặc custom hook. Bạn không thể gọi hooks trong vòng lặp, điều kiện, hoặc các hàm lồng nhau.
+- Hooks phải được gọi theo cùng một thứ tự trong mỗi lần render. Điều này giúp React theo dõi state và side effects một cách chính xác. Nếu bạn thay đổi thứ tự gọi hooks, React sẽ không thể xác định được state và side effects đúng cách, dẫn đến lỗi hoặc hành vi không mong muốn.
+- Bạn có thể tạo custom hook để tái sử dụng logic giữa các component khác nhau. Custom hook là một hàm JavaScript bắt đầu bằng từ "use" và có thể sử dụng các hooks khác bên trong nó. Custom hook giúp bạn tách logic liên quan đến state và side effects ra khỏi component, làm cho code trở nên dễ đọc và dễ bảo trì hơn.
