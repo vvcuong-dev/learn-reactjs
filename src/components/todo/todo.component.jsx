@@ -10,6 +10,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 function TodoComponent() {
   const [todoList, setTodoList] = useState([]);
   const [name, setName] = useState("");
+  const [filter, setFilter] = useState("all");
 
   const handleChange = (event) => {
     setName(event.target.value);
@@ -49,12 +50,11 @@ function TodoComponent() {
             autoClose: 3000,
           });
         }
-
         return { ...todo, completed: !todo.completed };
       }
-
       return todo;
     });
+
     setTodoList(updatedTodoList);
   };
 
@@ -104,14 +104,55 @@ function TodoComponent() {
     });
   };
 
+  const handleFilter = (filter) => {
+    setFilter(filter);
+    setTodoList(
+      todoList.filter((todo) => {
+        if (filter === "active") {
+          return !todo.completed;
+        }
+        if (filter === "completed") {
+          return todo.completed;
+        }
+        return true;
+      }),
+    );
+  };
+
+  /**
+   * giải thích hàm handleFilter:
+   *  - filter là trạng thái lưu trữ trạng thái lọc công việc (all, active, completed)
+   *  - setFilter(filter) --> cập nhật trạng thái filter mới
+   *  - setTodoList(...) --> cập nhật danh sách công việc dựa trên trạng thái filter mới
+   *  - todoList.filter(...) --> lọc danh sách công việc dựa trên trạng thái filter mới
+   *  - if (filter === "active") --> nếu trạng thái filter là "active" thì lọc ra các công việc chưa hoàn thành
+   *  - if (filter === "completed") --> nếu trạng thái filter là "completed" thì lọc ra các công việc đã hoàn thành
+   *  - return true --> nếu trạng thái filter là "all" thì trả về tất cả các công việc
+   */
+
   return (
     <div className="todos">
       <div className="w-50 mx-auto mt-5">
         <h1 className="text-center">Danh sách công việc</h1>
         <div className="filter d-flex justify-content-between mt-3">
-          <span className="active">All</span>
-          <span>Active</span>
-          <span>Completed</span>
+          <span
+            className={filter === "all" ? "active" : ""}
+            onClick={() => handleFilter("all")}
+          >
+            All
+          </span>
+          <span
+            className={filter === "active" ? "active" : ""}
+            onClick={() => handleFilter("active")}
+          >
+            Active
+          </span>
+          <span
+            className={filter === "completed" ? "active" : ""}
+            onClick={() => handleFilter("completed")}
+          >
+            Completed
+          </span>
         </div>
         <form action="" onSubmit={handleAdd}>
           <div className="input-group">
