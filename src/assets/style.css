@@ -7,3 +7,8 @@
 .todos .filter span {
   cursor: pointer;
 }
+
+.todos .todo-list .todo-item.completed span {
+  text-decoration: line-through;
+  color: #999;
+}
