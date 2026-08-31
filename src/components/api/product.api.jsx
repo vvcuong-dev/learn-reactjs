@@ -61,7 +61,7 @@ export class Product extends React.Component {
   };
 
   componentDidMount() {
-    this.getProducts();
+    this.getProducts(); // để getProducts() trong componentDidMount() để khi component được render lần đầu tiên, dữ liệu sẽ được lấy từ API và hiển thị lên giao diện.
   }
 
   render() {
