@@ -13,7 +13,9 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.8",
     "concurrently": "^10.0.5",
+    "prop-types": "^15.8.1",
     "react": "^19.2.8",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "^19.2.8",
     "react-toastify": "^11.1.0",
     "sass": "^1.102.0"
