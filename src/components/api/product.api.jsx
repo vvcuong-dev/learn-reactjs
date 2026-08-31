@@ -41,6 +41,25 @@ export class Product extends React.Component {
       alert("Tạo sản phẩm thành công");
     }
   };
+
+  deleteProduct = async (id) => {
+    const response = await fetch(`${SERVER_API}/products/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      this.getProducts();
+    }
+  };
+
+  handleDelete = (id) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+      this.deleteProduct(id);
+
+      alert("Xóa sản phẩm thành công");
+    }
+  };
+
   componentDidMount() {
     this.getProducts();
   }
@@ -63,15 +82,30 @@ export class Product extends React.Component {
             {products.map((product) => (
               <div
                 key={product.id}
-                onClick={() => this.handleClickProduct(product.id)}
                 style={{
                   cursor: "pointer",
                   marginBottom: "10px",
                 }}
               >
-                <p>
-                  {product.name} - ${product.price}
-                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                  }}
+                >
+                  <p onClick={() => this.handleClickProduct(product.id)}>
+                    {product.name} - ${product.price}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => this.handleDelete(product.id)}
+                  >
+                    Xóa
+                  </button>
+                </div>
               </div>
             ))}
           </>

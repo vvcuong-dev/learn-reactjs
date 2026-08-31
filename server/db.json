@@ -29,16 +29,7 @@
       "id": "6",
       "name": "chảo chớp",
       "price": "200"
-    },
-    {
-      "name": "áo choàng tím",
-      "price": "600",
-      "id": "15wqf1p47MM"
-    },
-    {
-      "name": "Tour Hạ Long ",
-      "price": "133",
-      "id": "d34nTVsmaw4"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
