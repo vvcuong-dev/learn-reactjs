@@ -1,18 +1,37 @@
 import "./App.css";
-import { useState } from "react";
-import CounterWithUseEffect from "./components/counter-use-effect";
-// import TodoComponent from "./components/todo/todo.component";
-// import Login from "./components/login.component";
-// import Counter from "./components/counter.component";
-// import UserComponent from "./components/user.component";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [show, setShow] = useState(true);
+  //State lưu kết quả sau khi API trả về
+
+  const [posts, setPosts] = useState([]);
+  const [isloading, setLoading] = useState(true);
+  useEffect(() => {
+    const getPosts = async () => {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts",
+      );
+      const data = await response.json();
+      setPosts(data);
+      setLoading(false);
+    };
+    getPosts();
+  }, []);
 
   return (
     <>
-      <button onClick={() => setShow(!show)}>Toggle Counter</button>
-      {show && <CounterWithUseEffect />}
+      <h1>Call API useState + useEffect</h1>
+      {isloading ? (
+        <p>Loading...</p>
+      ) : (
+        posts.map((post) => (
+          <div key={post.id}>
+            <h2>
+              {post.id} - {post.title}
+            </h2>
+          </div>
+        ))
+      )}
     </>
   );
 }
