@@ -167,3 +167,44 @@ Lưu ý: React Hooks có một số quy tắc quan trọng mà bạn cần tuân
 - Hooks chỉ có thể được gọi ở cấp độ trên cùng của component hoặc custom hook. Bạn không thể gọi hooks trong vòng lặp, điều kiện, hoặc các hàm lồng nhau.
 - Hooks phải được gọi theo cùng một thứ tự trong mỗi lần render. Điều này giúp React theo dõi state và side effects một cách chính xác. Nếu bạn thay đổi thứ tự gọi hooks, React sẽ không thể xác định được state và side effects đúng cách, dẫn đến lỗi hoặc hành vi không mong muốn.
 - Bạn có thể tạo custom hook để tái sử dụng logic giữa các component khác nhau. Custom hook là một hàm JavaScript bắt đầu bằng từ "use" và có thể sử dụng các hooks khác bên trong nó. Custom hook giúp bạn tách logic liên quan đến state và side effects ra khỏi component, làm cho code trở nên dễ đọc và dễ bảo trì hơn.
+
+Kết luận: React Hooks là một phần quan trọng trong React, giúp bạn sử dụng state và các tính năng khác của React mà không cần viết class component. Hiểu rõ cách sử dụng hooks sẽ giúp bạn viết code ngắn gọn, dễ đọc và dễ bảo trì hơn, đồng thời tận dụng tối đa các tính năng của React để xây dựng các ứng dụng linh hoạt và hiệu quả.
+
+6. Side Effects trong React
+
+Mục đích: Side effects trong React là các tác động phụ xảy ra ngoài phạm vi của component, chẳng hạn như gọi API, thao tác DOM, đăng ký sự kiện, hoặc lưu trữ dữ liệu. Side effects giúp bạn thực hiện các hành động cần thiết để tương tác với môi trường bên ngoài component. Những logic được thực thi bên ngoài phạm vi của component đều được gọi là các "side effect". Các side effect có thể cập nhật lại giao diện ứng dụng ở một thời điểm khác nhau.
+
+Ví dụ Side effect:
+
+1. người dùng tiến hành đăng nhập, khi click vào nút đăng nhập, ứng dụng sẽ gửi một request đến server để xác thực thông tin người dùng. Đây là một side effect vì nó xảy ra ngoài phạm vi của component và có thể ảnh hưởng đến trạng thái của ứng dụng.
+2. Nếu người dùng nhập thông tin vào một form và submit, ứng dụng sẽ gửi dữ liệu đến server để lưu trữ. Đây cũng là một side effect vì nó xảy ra ngoài phạm vi của component và có thể ảnh hưởng đến trạng thái của ứng dụng.
+3. Khi người dùng click vào một nút để tải dữ liệu từ server, ứng dụng sẽ gửi một request đến server và nhận dữ liệu trả về. Đây là một side effect vì nó xảy ra ngoài phạm vi của component và có thể ảnh hưởng đến trạng thái của ứng dụng.
+
+Đặc điểm:
+
+- Side effects có thể được thực hiện trong các phương thức vòng đời của class component, chẳng hạn như componentDidMount, componentDidUpdate, và componentWillUnmount.
+- Trong functional component, bạn có thể sử dụng hook useEffect để thực hiện side effects.
+- useEffect cho phép bạn thực hiện side effects sau khi component được render, và có thể được cấu hình để chạy lại khi state hoặc props thay đổi, hoặc trước khi component bị hủy.
+- Side effects có thể ảnh hưởng đến hiệu suất của ứng dụng nếu không được quản lý đúng cách. Bạn nên đảm bảo rằng bạn chỉ thực hiện các side effects cần thiết và dọn dẹp các tài nguyên khi component bị hủy để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+- Lưu ý: Khi sử dụng useEffect trong functional component, bạn có thể truyền vào một mảng phụ thuộc (dependency array) để xác định khi nào effect sẽ được chạy lại. Nếu mảng phụ thuộc rỗng, effect sẽ chỉ chạy một lần sau khi component được render lần đầu. Nếu bạn truyền vào các giá trị trong mảng phụ thuộc, effect sẽ chạy lại mỗi khi các giá trị đó thay đổi.
+- Bạn nên tránh thực hiện các side effects trực tiếp trong render hoặc trong các phương thức vòng đời khác mà không sử dụng useEffect hoặc các phương thức tương tự. Thay vào đó, hãy sử dụng useEffect hoặc các phương thức vòng đời để thực hiện side effects sau khi component được render hoặc cập nhật, giúp đảm bảo rằng các side effects được quản lý đúng cách và không ảnh hưởng đến hiệu suất của ứng dụng.
+
+Kết luận: Side effects là một phần quan trọng trong React, giúp bạn thực hiện các hành động cần thiết để tương tác với môi trường bên ngoài component. Hiểu rõ cách quản lý side effects sẽ giúp bạn xây dựng các ứng dụng React hiệu quả và tối ưu hơn, đồng thời tránh các vấn đề về rò rò bộ nhớ và hiệu suất.
+
+7. Hook useEffect
+
+Mục đích: Hook useEffect trong React là một hook đặc biệt được sử dụng để thực hiện side effects trong functional component. Nó cho phép bạn thực hiện các hành động cần thiết sau khi component được render, và có thể được cấu hình để chạy lại khi state hoặc props thay đổi, hoặc trước khi component bị hủy.
+
+Đặc điểm:
+
+- useEffect nhận vào hai đối số: một hàm callback và một mảng phụ thuộc (dependency array). Hàm callback chứa các side effects mà bạn muốn thực hiện, và mảng phụ thuộc xác định khi nào effect sẽ được chạy lại.
+- Nếu mảng phụ thuộc rỗng, effect sẽ chỉ chạy một lần sau khi component được render lần đầu. Nếu bạn truyền vào các giá trị trong mảng phụ thuộc, effect sẽ chạy lại mỗi khi các giá trị đó thay đổi.
+- useEffect có thể trả về một hàm dọn dẹp (cleanup function) để thực hiện các hành động trước khi component bị hủy. Hàm dọn dẹp này sẽ được gọi trước khi effect chạy lại hoặc trước khi component bị hủy, giúp bạn dọn dẹp các tài nguyên và tránh rò rò bộ nhớ.
+- useEffect có thể được sử dụng để thực hiện các side effects như gọi API, thao tác DOM, đăng ký sự kiện, hoặc lưu trữ dữ liệu. Bạn nên đảm bảo rằng bạn chỉ thực hiện các side effects cần thiết và dọn dẹp các tài nguyên khi component bị hủy để tránh rò rò bộ nhớ và các vấn đề về hiệu suất.
+
+Lưu ý: Khi sử dụng useEffect, bạn nên tuân thủ các quy tắc sau:
+
+- Hooks chỉ có thể được gọi ở cấp độ trên cùng của component hoặc custom hook. Bạn không thể gọi hooks trong vòng lặp, điều kiện, hoặc các hàm lồng nhau.
+- Hooks phải được gọi theo cùng một thứ tự trong mỗi lần render. Điều này giúp React theo dõi state và side effects một cách chính xác. Nếu bạn thay đổi thứ tự gọi hooks, React sẽ không thể xác định được state và side effects đúng cách, dẫn đến lỗi hoặc hành vi không mong muốn.
+
+Kết luận: Hook useEffect là một phần quan trọng trong React, giúp bạn thực hiện side effects trong functional component một cách hiệu quả. Hiểu rõ cách sử dụng useEffect sẽ giúp bạn quản lý side effects đúng cách, tránh rò rò bộ nhớ và các vấn đề về hiệu suất, đồng thời xây dựng các ứng dụng React linh hoạt và tối ưu hơn.
