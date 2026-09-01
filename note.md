@@ -208,3 +208,16 @@ Lưu ý: Khi sử dụng useEffect, bạn nên tuân thủ các quy tắc sau:
 - Hooks phải được gọi theo cùng một thứ tự trong mỗi lần render. Điều này giúp React theo dõi state và side effects một cách chính xác. Nếu bạn thay đổi thứ tự gọi hooks, React sẽ không thể xác định được state và side effects đúng cách, dẫn đến lỗi hoặc hành vi không mong muốn.
 
 Kết luận: Hook useEffect là một phần quan trọng trong React, giúp bạn thực hiện side effects trong functional component một cách hiệu quả. Hiểu rõ cách sử dụng useEffect sẽ giúp bạn quản lý side effects đúng cách, tránh rò rò bộ nhớ và các vấn đề về hiệu suất, đồng thời xây dựng các ứng dụng React linh hoạt và tối ưu hơn.
+
+8. Clean Effect trong React
+
+Một số Effect cần cleanup khi thực thi. điều này có thể là các công việc sau:
+
+- Hủy bỏ các sự kiện đã đăng ký, ví dụ: removeEventListener.
+- Hủy bỏ các timer đã thiết lập, ví dụ: clearTimeout hoặc clearInterval.
+- xóa các sự kiện đăng ký, ví dụ: unsubscribe từ các dịch vụ hoặc API.
+- hủy các biến
+- hủy các kết nối mạng, ví dụ: hủy các request đang chờ phản hồi từ server.
+- xóa các timer, ví dụ: clearTimeout hoặc clearInterval.
+
+Điều này đảm bảo rằng Effect không còn ảnh hưởng đến Component sau khi nó đã được gọi, và giúp tránh các vấn đề về rò rò bộ nhớ và hiệu suất trong ứng dụng React.

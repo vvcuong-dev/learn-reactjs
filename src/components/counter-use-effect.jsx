@@ -9,7 +9,17 @@ function CounterWithUseEffect() {
 
   useEffect(() => {
     console.log("Effect:", count);
+    return () => {
+      console.log("Cleanup:", count); // nghĩa là trước khi component unmount hoặc trước khi callback được gọi lại thì cleanup sẽ được gọi
+    };
   }, [count]);
+
+  useEffect(() => {
+    console.log("Mounting: CounterWithUseEffect");
+    return () => {
+      console.log("Unmounting: CounterWithUseEffect");
+    };
+  }, []);
 
   return (
     <div>
@@ -39,4 +49,18 @@ export default CounterWithUseEffect;
  *  - useEffect(callback, dependencies) có thể return về một hàm cleanup để dọn dẹp các logic side effects trước khi component unmount hoặc trước khi callback được gọi lại.
  *
  *  - useEffect(callback, dependencies) có thể có nhiều hơn 1 useEffect trong cùng 1 component.
+ */
+
+/**
+ * Thứ tự hoạt động trong useEffect:
+ * 1. State thay đổi
+ * 2. Component re-render
+ * 3. update UI
+ * 4. cleanup (nếu có) - là kết quả của callback trước đó, nếu có return về 1 hàm cleanup thì cleanup sẽ được gọi trước khi callback được gọi lại hoặc trước khi component unmount.
+ * 5. callback
+ *
+ *  - Khi state thay đổi thì component sẽ re-render, sau khi re-render xong thì callback sẽ được gọi.
+ *  - Nếu callback có return về một hàm cleanup thì cleanup sẽ được gọi trước khi callback được gọi lại hoặc trước khi component unmount.
+ *
+ *  - Khi component unmount thì cleanup sẽ được gọi.
  */
