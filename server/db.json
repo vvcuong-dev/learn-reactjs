@@ -1,35 +1,34 @@
 {
-  "products": [
+  "messages": [
     {
-      "id": "1",
-      "name": "Product 1",
-      "price": 10.99
+      "id": 1,
+      "text": "Hello, how are you?",
+      "user": "Cường Vũ"
     },
     {
-      "id": "2",
-      "name": "Product 2",
-      "price": 19.99
+      "id": 2,
+      "text": "I'm good, thanks! How about you?",
+      "user": "minh huyền"
     },
     {
-      "id": "3",
-      "name": "Product 3",
-      "price": 5.99
+      "id": 3,
+      "text": "I'm doing well too. What are you up to?",
+      "user": "Cường Vũ"
     },
     {
-      "id": "4",
-      "name": "Tour trong nước",
-      "price": "123"
+      "id": 4,
+      "text": "Just working on a project. How about you?",
+      "user": "minh huyền"
     },
     {
-      "id": "5",
-      "name": "Nồi cơm điện",
-      "price": "1000"
+      "id": 5,
+      "text": "Same here. It's been a busy week.",
+      "user": "Cường Vũ"
     },
     {
-      "id": "6",
-      "name": "chảo chớp",
-      "price": "200"
+      "id": 6,
+      "text": "I hear you. Let's catch up soon.",
+      "user": "minh huyền"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

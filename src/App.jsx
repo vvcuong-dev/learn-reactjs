@@ -1,12 +1,19 @@
 import "./App.css";
-import Image from "./components/image-use-effect";
+import ChatComponent from "./components/chat/chat.component";
 
 function App() {
   return (
     <>
-      <Image />
+      <ChatComponent />
     </>
   );
 }
 
 export default App;
+
+/**
+ * Client: React: useState + useEffect
+ * Server: JSON Server
+ *
+ * HTTP Short Polling: Client gửi request đến server mỗi khoảng thời gian nhất định để lấy dữ liệu mới.
+ */
