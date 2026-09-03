@@ -49,6 +49,16 @@
       "user": "minh huyền",
       "text": "mình nghĩ cũng k cần nghe lắm, hihi",
       "id": "Y9HzqQOrZV8"
+    },
+    {
+      "user": "cuong vu",
+      "text": "ummm",
+      "id": "xZolBfl3N2A"
+    },
+    {
+      "user": "cuong vu",
+      "text": "ummm",
+      "id": "WjfMKOk_RYs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

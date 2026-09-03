@@ -91,3 +91,7 @@ export default Users;
  * số 3 và 4 dường như khá giống nhau, nhưng componentDidMount chỉ được gọi một lần khi component được render lần đầu tiên,
  * còn componentDidUpdate được gọi mỗi khi component được cập nhật (state hoặc props thay đổi).
  */
+
+/**
+ * khi state hoặc props thay đổi, component sẽ re-render và gọi lại phương thức render, sau đó gọi componentDidUpdate.
+ */
