@@ -1,34 +1,55 @@
 {
   "messages": [
     {
-      "id": 1,
+      "id": "1",
       "text": "Hello, how are you?",
       "user": "Cường Vũ"
     },
     {
-      "id": 2,
+      "id": "2",
       "text": "I'm good, thanks! How about you?",
       "user": "minh huyền"
     },
     {
-      "id": 3,
+      "id": "3",
       "text": "I'm doing well too. What are you up to?",
       "user": "Cường Vũ"
     },
     {
-      "id": 4,
+      "id": "4",
       "text": "Just working on a project. How about you?",
       "user": "minh huyền"
     },
     {
-      "id": 5,
+      "id": "5",
       "text": "Same here. It's been a busy week.",
       "user": "Cường Vũ"
     },
     {
-      "id": 6,
+      "id": "6",
       "text": "I hear you. Let's catch up soon.",
       "user": "minh huyền"
+    },
+    {
+      "user": "cường vũ",
+      "text": "ummm",
+      "id": "_GVNfYuk0eU"
+    },
+    {
+      "user": "cường vũ",
+      "text": "i miss uu",
+      "id": "iy9z1kmXIcU"
+    },
+    {
+      "user": "cường vũ",
+      "text": "........ có nhiều điều muốn hỏi mà chẳng dám hỏii",
+      "id": "vvhypu5MnWQ"
+    },
+    {
+      "user": "minh huyền",
+      "text": "mình nghĩ cũng k cần nghe lắm, hihi",
+      "id": "Y9HzqQOrZV8"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
