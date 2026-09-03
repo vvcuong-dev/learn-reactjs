@@ -17,6 +17,7 @@ export default function InputComponent() {
       setForm((prevForm) => ({ ...prevForm, user: savedUser }));
     }
   }, []);
+  // [] => chỉ chạy 1 lần sau khi component mount
 
   const handleChange = (e) => {
     const { name, value } = e.target;
