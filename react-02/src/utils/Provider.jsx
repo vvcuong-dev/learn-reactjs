@@ -5,7 +5,7 @@ export const ProviderContext = createContext(null);
 
 export default function Provider({ children }) {
   const initialState = {
-    todoList: [],
+    todoList: [{ id: 1, name: "Learn React", completed: false }],
   };
   const [state, setState] = useState(initialState);
 

@@ -11,3 +11,13 @@ label {
   background-color: lightblue;
   color: #000;
 }
+
+.todo-app ul li {
+  list-style: none;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo-app ul li .completed {
+  text-decoration: line-through;
+}

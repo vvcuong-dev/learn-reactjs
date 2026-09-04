@@ -1,3 +1,4 @@
+import "../../assets/styles.css";
 import TodoAdd from "./TodoAdd";
 import TodoList from "./TodoList";
 
