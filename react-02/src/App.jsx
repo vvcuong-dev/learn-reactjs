@@ -1,14 +1,16 @@
 import "./App.css";
 import { useRef, useEffect } from "react";
+import Button from "./component/button";
 
 function App() {
   const divRef = useRef(null);
   const inputRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
-    console.log("divRef.current:", divRef.current);
     divRef.current.style.backgroundColor = "lightblue";
     inputRef.current.focus();
+    buttonRef.current.style.backgroundColor = "lightgreen";
   }, []);
 
   return (
@@ -24,6 +26,8 @@ function App() {
         style={{ marginTop: "10px" }}
         placeholder="Type something..."
       />
+
+      <Button label="Click me" ref={buttonRef} />
     </>
   );
 }
