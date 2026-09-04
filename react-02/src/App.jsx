@@ -1,24 +1,12 @@
 import "./App.css";
-import { createContext, useState } from "react";
-import Theme from "./component/Theme";
-
-export const AppContext = createContext(null);
+import Todo from "./component/todo/Todo";
+import Provider from "./utils/Provider";
 
 function App() {
-  const [theme, setTheme] = useState("light");
-
   return (
-    <>
-      <h1>Hello, React!</h1>
-      <AppContext.Provider
-        value={{
-          theme: theme,
-          setTheme: setTheme,
-        }}
-      >
-        <Theme />
-      </AppContext.Provider>
-    </>
+    <Provider>
+      <Todo />
+    </Provider>
   );
 }
 
