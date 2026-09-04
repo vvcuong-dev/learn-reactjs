@@ -1,23 +1,29 @@
 import "./App.css";
-import { useState, useRef } from "react";
+import { useRef, useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const countRef = useRef(0);
+  const divRef = useRef(null);
+  const inputRef = useRef(null);
 
-  console.log("App component rendered");
-
-  const handleClick = () => {
-    setCount(count + 1);
-    countRef.current++;
-    console.log("countRef.current sau khi tăng:", countRef.current);
-  };
+  useEffect(() => {
+    console.log("divRef.current:", divRef.current);
+    divRef.current.style.backgroundColor = "lightblue";
+    inputRef.current.focus();
+  }, []);
 
   return (
     <>
       <h1>Hello, React!</h1>
-      <p>Count: {count}</p>
-      <button onClick={handleClick}>Increment</button>
+      <div ref={divRef} className="my-div">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident,
+        delectus!
+      </div>
+      <input
+        type="text"
+        ref={inputRef}
+        style={{ marginTop: "10px" }}
+        placeholder="Type something..."
+      />
     </>
   );
 }
@@ -35,5 +41,12 @@ export default App;
  *
  * Lưu ý: useRef không làm trigger re-render khi giá trị current thay đổi, nên nếu muốn hiển thị giá trị
  *        mới của countRef.current trên UI, bạn cần dùng useState hoặc forceUpdate.
- *
+ */
+
+/**
+ * Một số tình huống k sử dụng state mà dùng useRef:
+ * 1. Lưu trữ giá trị giữa các lần render mà không cần trigger re-render.
+ * 2. Truy cập trực tiếp vào DOM elements (ví dụ: focus input, scroll, etc.).
+ * 3. Lưu trữ giá trị trước đó (previous value) để so sánh với giá trị hiện tại.
+ * 4. Lưu trữ các timers hoặc subscriptions để cleanup khi component unmounts.
  */
