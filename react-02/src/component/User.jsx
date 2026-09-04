@@ -1,29 +1,10 @@
 import "../assets/styles.css";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function User() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [deletedCount, setDeletedCount] = useState(0);
-  const checkBoxListRef = useRef([]);
-
-  const handleCheckAll = (e) => {
-    const status = e.target.checked;
-
-    if (status) {
-      setDeletedCount(checkBoxListRef.current.length);
-    } else {
-      setDeletedCount(0);
-    }
-
-    console.log("CheckBoxListRef:", checkBoxListRef.current);
-
-    checkBoxListRef.current.forEach((checkbox) => {
-      if (checkbox) {
-        checkbox.checked = status;
-      }
-    });
-  };
+  const [selectedIds, setSelectedIds] = useState(new Set());
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -38,15 +19,36 @@ export default function User() {
       });
   }, []);
 
-  //   useEffect(() => {
-  //     console.log("CheckBoxListRef:", checkBoxListRef.current);
-  //   }, [users, isLoading]);
+  const handleCheckAll = (e) => {
+    if (e.target.checked) {
+      setSelectedIds(new Set(users.map((user) => user.id)));
+    } else {
+      setSelectedIds(new Set());
+    }
+  };
+
+  const handleCheckItem = (id) => (e) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (e.target.checked) {
+        next.add(id);
+      } else {
+        next.delete(id);
+      }
+      return next;
+    });
+  };
 
   return (
     <div>
       <h2>Danh sách người dùng</h2>
       <label>
-        <input type="checkbox" onChange={handleCheckAll} /> Tất cả
+        <input
+          type="checkbox"
+          checked={users.length > 0 && selectedIds.size === users.length}
+          onChange={handleCheckAll}
+        />{" "}
+        Tất cả
       </label>
 
       {isLoading ? (
@@ -56,18 +58,15 @@ export default function User() {
           <label key={index}>
             <input
               type="checkbox"
-              ref={(ref) => {
-                checkBoxListRef.current[index] = ref;
-              }}
-              // nghĩa là checkBoxListRef.current[index] sẽ lưu trữ tham chiếu đến phần tử checkbox tương
-              // ứng với người dùng tại vị trí index trong mảng users.
+              checked={selectedIds.has(user.id)}
+              onChange={handleCheckItem(user.id)}
             />{" "}
             {user.name}
           </label>
         ))
       )}
-      <button disabled={deletedCount === 0}>
-        Xóa đã chọn ({deletedCount})
+      <button disabled={selectedIds.size === 0}>
+        Xóa đã chọn ({selectedIds.size})
       </button>
     </div>
   );
