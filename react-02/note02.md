@@ -37,3 +37,11 @@ Vấn đề: Trong react, thường thì bạn sẽ truyền dữ liệu từ m�
 1. Tạo một Context bằng cách sử dụng `React.createContext()`. Điều này sẽ tạo ra một đối tượng Context mà bạn có thể sử dụng để cung cấp và tiêu thụ dữ liệu.
 2. Sử dụng `Context.Provider` để cung cấp dữ liệu cho các component con. Bạn có thể đặt `Context.Provider` ở bất kỳ đâu trong cây component của bạn, và tất cả các component con bên dưới nó sẽ có thể truy cập dữ liệu được cung cấp.
 3. Sử dụng `Context.Consumer` hoặc hook `useContext` để tiêu thụ dữ liệu từ Context trong các component con. `Context.Consumer` là một component mà bạn có thể sử dụng để truy cập dữ liệu từ Context, trong khi `useContext` là một hook mà bạn có thể sử dụng trong các functional component để truy cập dữ liệu từ Context.
+
+### Các trường hợp sử dụng Context API
+
+1. Đổi giao diện (theming): cho phép bạn thay đổi giao diện ứng dụng, ví dụ như chế độ ban đêm (dark mode)
+2. Thông tin tài khoản hiện tại: cho phép bạn lưu trữ thông tin người dùng hiện tại và cung cấp nó cho các component khác trong ứng dụng.
+3. Định tuyến (routing): cho phép bạn quản lý trạng thái định tuyến trong ứng dụng của bạn.
+4. Quản lý state: Khi ứng dụng phức tạp và cần quản lý state phức tạp qua nhiều component, Context API có thể giúp bạn quản lý state một cách hiệu quả hơn.
+5. Ngôn ngữ (localization): cho phép bạn lưu trữ thông tin ngôn ngữ hiện tại và cung cấp nó cho các component khác trong ứng dụng.
