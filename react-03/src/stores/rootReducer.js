@@ -4,6 +4,8 @@ export const rootReducer = (state, action) => {
       return { ...state, count: state.count + (action.payload || 1) };
     case "COUNTER/DECREMENT":
       return { ...state, count: state.count - (action.payload || 1) };
+    case "TODO/ADD":
+      return { ...state, todoList: [...state.todoList, action.payload] };
     default:
       return state;
   }
