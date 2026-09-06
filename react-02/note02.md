@@ -4,6 +4,8 @@
 
 2. [Context API](#context-api)
 
+3. [useReducer](#usereducer)
+
 ## Refs và Hook useRef
 
 ### Vấn đề
@@ -45,3 +47,26 @@ Vấn đề: Trong react, thường thì bạn sẽ truyền dữ liệu từ m�
 3. Định tuyến (routing): cho phép bạn quản lý trạng thái định tuyến trong ứng dụng của bạn.
 4. Quản lý state: Khi ứng dụng phức tạp và cần quản lý state phức tạp qua nhiều component, Context API có thể giúp bạn quản lý state một cách hiệu quả hơn.
 5. Ngôn ngữ (localization): cho phép bạn lưu trữ thông tin ngôn ngữ hiện tại và cung cấp nó cho các component khác trong ứng dụng.
+
+## useReducer
+
+### Vấn đề
+
+- Khi ứng dụng của bạn trở nên phức tạp, việc quản lý state có thể trở nên khó khăn. Bạn có thể cần phải quản lý nhiều state khác nhau và các action khác nhau để cập nhật state. Trong những trường hợp này, `useReducer` là một hook hữu ích để quản lý state phức tạp.
+
+### useReducer là gì?
+
+- `useReducer` là một hook trong React cho phép bạn quản lý state phức tạp bằng cách sử dụng một reducer function. Reducer function nhận vào state hiện tại và một action, và trả về state mới dựa trên action đó. `useReducer` cung cấp một cách tiếp cận rõ ràng và có cấu trúc hơn để quản lý state so với việc sử dụng nhiều `useState` hooks.
+
+### Cách sử dụng useReducer
+
+1. Định nghĩa một reducer function: Reducer function nhận vào hai tham số: state hiện tại và action. Nó sẽ trả về state mới dựa trên action đó.
+2. Sử dụng hook `useReducer`: Bạn có thể sử dụng hook `useReducer` trong component của bạn để quản lý state. `useReducer` trả về một mảng gồm hai phần tử: state hiện tại và một hàm dispatch để gửi action đến reducer function.
+3. Gửi action đến reducer function: Bạn có thể sử dụng hàm dispatch để gửi action đến reducer function. Action là một đối tượng mô tả loại hành động mà bạn muốn thực hiện để cập nhật state. Reducer function sẽ xử lý action và trả về state mới.
+4. Cập nhật state dựa trên action: Khi reducer function trả về state mới, component của bạn sẽ được re-render với state mới đó. Bạn có thể sử dụng state mới trong component của bạn để hiển thị dữ liệu hoặc thực hiện các hành động khác.
+
+### Các trường hợp sử dụng useReducer
+
+1. Quản lý state phức tạp: Khi bạn có nhiều state khác nhau và các action khác nhau để cập nhật state, `useReducer` giúp bạn quản lý state một cách rõ ràng và có cấu trúc hơn.
+2. Quản lý state dựa trên các action: Khi bạn muốn quản lý state dựa trên các action cụ thể, `useReducer` cung cấp một cách tiếp cận rõ ràng và có cấu trúc hơn để quản lý state so với việc sử dụng nhiều `useState` hooks.
+3. Khi bạn muốn tách logic quản lý state ra khỏi component: `useReducer` cho phép bạn tách logic quản lý state ra khỏi component, giúp code của bạn trở nên dễ đọc và dễ bảo trì hơn. Bạn có thể định nghĩa reducer function ở một file riêng biệt và import nó vào component của bạn, giúp code của bạn trở nên rõ ràng và dễ bảo trì hơn.
