@@ -1,15 +1,12 @@
-export const rootReducer = (state, action) => {
-  switch (action.type) {
-    case "COUNTER/INCREMENT":
-      return { ...state, count: state.count + (action.payload || 1) };
-    case "COUNTER/DECREMENT":
-      return { ...state, count: state.count - (action.payload || 1) };
-    case "TODO/ADD":
-      return { ...state, todoList: [...state.todoList, action.payload] };
-    default:
-      return state;
-  }
-};
+import { combineReducers } from "../utils/core.js";
+import { counterReducer, counterState } from "./reducers/counterReducer.js";
+import { todoState } from "./reducers/todoReducer.js";
+import { todoReducer } from "./reducers/todoReducer.js";
+
+export const [rootReducer, initialState] = combineReducers({
+  counter: [counterReducer, counterState],
+  todo: [todoReducer, todoState],
+});
 
 /**
  * type: feature/action

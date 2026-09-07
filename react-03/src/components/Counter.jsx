@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "../utils/hook";
 import { increment, decrement } from "../stores/actions/counterAction";
 
 function Counter() {
-  const count = useSelector((state) => state.count);
+  const count = useSelector((state) => state.counter.count);
   const dispatch = useDispatch();
 
   const handleIncrement = () => {

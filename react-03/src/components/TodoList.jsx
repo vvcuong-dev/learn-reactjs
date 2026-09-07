@@ -4,7 +4,10 @@ import { addTodo } from "../stores/actions/todoActions";
 
 export default function TodoList() {
   const [name, setName] = useState("");
-  const todoList = useSelector((state) => state.todoList);
+  const todoList = useSelector((state) => {
+    return state.todo.todoList;
+  });
+
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
