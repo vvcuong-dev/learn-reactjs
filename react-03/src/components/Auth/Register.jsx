@@ -1,9 +1,9 @@
 import Input from "./Input";
 
-export default function Login() {
+export default function Register() {
   return (
     <form>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <div
         style={{
           display: "flex",
@@ -14,6 +14,12 @@ export default function Login() {
           alignItems: "center",
         }}
       >
+        <Input
+          label="Username"
+          type="text"
+          name="username"
+          placeholder="Enter your username"
+        />
         <Input
           label="Email"
           type="email"
@@ -27,7 +33,7 @@ export default function Login() {
           placeholder="Enter your password"
         />
       </div>
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   );
 }

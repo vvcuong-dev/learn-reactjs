@@ -4,7 +4,9 @@ import App from "./App.jsx";
 import Provider from "./utils/Provider.jsx";
 import { store } from "./stores/store.js";
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root"), {
+  identifierPrefix: "my-app",
+}).render(
   <Provider store={store}>
     <App />
   </Provider>,
