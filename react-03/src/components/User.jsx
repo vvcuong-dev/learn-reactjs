@@ -2,7 +2,7 @@ import user from "../../src/data/db.json";
 import { useState, useTransition } from "react";
 
 export default function User() {
-  const [inputValue, setInputValue] = useState(""); // giá trị hiển thị trên input - luôn urgent
+  const [inputValue, setInputValue] = useState(""); // giá trị hiển thị trên input - luôn urgent (nhập vào input phải hiển thị ngay, không được delay)
   const [keyword, setKeyword] = useState(""); // giá trị dùng để lọc - có thể trễ
   const [isPending, startTransition] = useTransition();
 
