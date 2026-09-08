@@ -4,8 +4,6 @@ import { createContext, useReducer } from "react";
 export const Provider01Context = createContext();
 
 export default function Provider01({ children, store }) {
-  console.log("store", store);
-  console.log("children", children);
   const [state, dispatch] = useReducer(...store);
 
   const contextValue = {

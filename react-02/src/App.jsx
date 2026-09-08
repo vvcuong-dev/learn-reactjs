@@ -1,9 +1,12 @@
 import "./App.css";
-import { useContext } from "react";
-import { Provider01Context } from "./utils/Provider01.jsx";
+import { useDispatch, useSelector } from "./utils/hook";
 
 function App() {
-  const { state, dispatch } = useContext(Provider01Context);
+  const count = useSelector((state) => state.count); // nghĩa là useSelector nhận vào một callback function, callback function này nhận vào state và trả về state.count, kết quả của useSelector sẽ là state.count
+  const dispatch = useDispatch();
+
+  // console.log("state", state);
+
   const handleIncrement = () => {
     dispatch({ type: "COUNTER/INCREMENT", payload: 10 });
   };
@@ -14,7 +17,7 @@ function App() {
 
   return (
     <div>
-      <h1>Count: {state.count}</h1>
+      <h1>Count: {count}</h1>
       <div
         style={{
           display: "flex",
