@@ -1,19 +1,20 @@
 import user from "../../src/data/db.json";
-import { useState, useTransition } from "react";
+import { useState, useDeferredValue } from "react";
 
 export default function User() {
-  const [inputValue, setInputValue] = useState(""); // giá trị hiển thị trên input - luôn urgent (nhập vào input phải hiển thị ngay, không được delay)
-  const [keyword, setKeyword] = useState(""); // giá trị dùng để lọc - có thể trễ
-  const [isPending, startTransition] = useTransition();
+  const [keyword, setKeyword] = useState(""); // giá trị gốc - cập nhật ngay khi gõ, input luôn mượt
+  const deferredKeyword = useDeferredValue(keyword); //
+
+  console.log("deferredKeyword: ", deferredKeyword);
+
+  const isPending = keyword !== deferredKeyword; // so sánh 2 giá trị để biết đang "trễ" hay không
+  /**
+   * nếu keyword và deferredKeyword khác nhau => đang "trễ" => isPending = true
+   * nếu keyword và deferredKeyword giống nhau => không "trễ" => isPending = false
+   */
 
   const handleSearch = (e) => {
-    const value = e.target.value;
-
-    setInputValue(value); // cập nhật NGAY, để gõ không bị lag
-
-    startTransition(() => {
-      setKeyword(value); // cập nhật "trễ hơn", việc lọc/render nặng sẽ chạy trong transition này
-    });
+    setKeyword(e.target.value); // chỉ cần 1 state, cập nhật ngay - không cần inputValue riêng nữa
   };
 
   return (
@@ -22,7 +23,7 @@ export default function User() {
         type="text"
         name="keyword"
         placeholder="Search..."
-        value={inputValue}
+        value={keyword}
         onChange={handleSearch}
       />
 
@@ -30,18 +31,20 @@ export default function User() {
 
       <div style={{ opacity: isPending ? 0.5 : 1 }}>
         {user.map(({ id, fullName }) => {
-          const pos = fullName.toLowerCase().indexOf(keyword.toLowerCase());
+          const pos = fullName
+            .toLowerCase()
+            .indexOf(deferredKeyword.toLowerCase()); // dùng deferredKeyword để lọc
 
-          if (keyword) {
+          if (deferredKeyword) {
             if (pos === -1) return null;
 
             return (
               <h3 key={id}>
                 {fullName.slice(0, pos)}
                 <span style={{ backgroundColor: "yellow" }}>
-                  {fullName.slice(pos, pos + keyword.length)}
+                  {fullName.slice(pos, pos + deferredKeyword.length)}
                 </span>
-                {fullName.slice(pos + keyword.length)}
+                {fullName.slice(pos + deferredKeyword.length)}
               </h3>
             );
           }
