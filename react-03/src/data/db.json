@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "fullName": "John Doe",
+    "email": "john.doe@example.com"
+  },
+  {
+    "id": 2,
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "fullName": "Jane Smith",
+    "email": "john.doe@example.com"
+  },
+
+  {
+    "id": 3,
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "fullName": "Alice Johnson",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 4,
+    "firstName": "Bob",
+    "lastName": "Williams",
+    "fullName": "Bob Williams",
+    "email": "john.doe@example.com"
+  },
+  {
+    "id": 5,
+    "firstName": "Charlie",
+    "lastName": "Brown",
+    "fullName": "Charlie Brown",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 6,
+    "firstName": "David",
+    "lastName": "Miller",
+    "fullName": "David Miller",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 7,
+    "firstName": "Eve",
+    "lastName": "Davis",
+    "fullName": "Eve Davis",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 8,
+    "firstName": "Frank",
+    "lastName": "Garcia",
+    "fullName": "Frank Garcia",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 9,
+    "firstName": "Grace",
+    "lastName": "Martinez",
+    "fullName": "Grace Martinez",
+    "email": "alicejohnson:@example.com"
+  },
+  {
+    "id": 10,
+    "firstName": "Hannah",
+    "lastName": "Rodriguez",
+    "fullName": "Hannah Rodriguez",
+    "email": "alicejohnson:@example.com"
+  }
+]
