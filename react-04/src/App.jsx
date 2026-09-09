@@ -7,6 +7,7 @@ import Product from "./pages/Product";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 import Forbidden from "./pages/Forbidden";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/403" element={<Forbidden />} />
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
