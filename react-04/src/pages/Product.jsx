@@ -10,7 +10,7 @@ export default function Product() {
   useEffect(() => {
     const getPosts = async () => {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/post1s",
+        "https://jsonplaceholder.typicode.com/posts",
       );
 
       if (!response.ok) {

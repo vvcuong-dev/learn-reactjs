@@ -12,11 +12,6 @@ export default function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // navigate("/thank-you", {
-    //   replace: true,
-    //   // state: { message: "Ốp la xin cảm ơn tất cả mọi người!" },
-
-    // });
 
     navigate(params);
   };
