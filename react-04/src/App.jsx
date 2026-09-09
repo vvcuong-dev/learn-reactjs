@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Product from "./pages/Product";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
+import Forbidden from "./pages/Forbidden";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/products" element={<Product />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/thank-you" element={<ThankYou />} />
+            <Route path="/403" element={<Forbidden />} />
           </Routes>
         </div>
       </div>

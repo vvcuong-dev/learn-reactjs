@@ -44,3 +44,5 @@ export default function Home() {
  *
  * Ví dụ: trang A đi tới trang B, tại trang B chúng ta click back lên trình duyệt thì sẽ không quay lại trang A nữa.
  */
+
+// Component Navigate
