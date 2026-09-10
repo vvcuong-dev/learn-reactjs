@@ -14,6 +14,8 @@
 
 7. [useNavigate](#usenavigate)
 
+8. [AbortController](#abortcontroller)
+
 ## useImperativeHandle
 
 ### Vấn đề
@@ -171,3 +173,45 @@ react-router-dom là thư viện phổ biến nhất để định tuyến (rout
 - Truyền dữ liệu qua URL (params, query string).
 - Bảo vệ route (route yêu cầu đăng nhập, phân quyền...).
 - Lazy load từng route để tối ưu hiệu năng.
+
+## AbortController
+
+- AbortController là một API có sẵn trong trình duyệt, dùng để hủy (cancel) một request đang chạy dở.
+
+### Vấn đề nó giải quyết:
+
+User vào trang → component mount → gọi API lấy allPosts (mất 2 giây mới xong)
+User bấm sang trang khác NGAY LẬP TỨC (trước khi 2 giây trôi qua)
+→ component bị unmount (biến mất khỏi màn hình)
+2 giây sau, API trả về dữ liệu
+→ code cố gắng setAllPosts(data) cho 1 component ĐÃ KHÔNG CÒN TỒN TẠI
+
+=> Trường hợp này gây ra lỗi/warning: "Can't perform a React state update on an unmounted component." và tệ hơn nó có thể lãng phí tài nguyên (request vẫn chạy dù không ai cần kết quả nữa)
+
+### AbortController giải quyết như thế nào
+
+Nó hoạt động như 1 cái "công tác hủy", gồm 2 phần
+
+const controller = new AbortController();
+
+- controller = cục điều khiển, có sẵn 1 thuộc tính tên signal bên trong.
+- controller.signal sẽ được gắn vòa request fetch, như một "sợi dây" nối giữa controller và request đó.
+
+fetch(url, { signal: controller.signal })
+
+=> nói với fetch: "này, nếu tao gọi controller.abort() thì hãy hủy request này ngay lập tức"
+
+return () => controller.abort();
+
+→ Đây là cleanup function của useEffect. React tự động gọi hàm này khi:
+
+Component bị unmount (rời khỏi màn hình), HOẶC
+useEffect sắp chạy lại lần nữa (vì dependency thay đổi)
+
+Ví dụ minh hoạ luồng thời gian
+
+0.0s → component mount, useEffect chạy, tạo controller, gọi fetch (bắt đầu chờ)
+0.5s → user bấm chuyển trang → component unmount
+0.5s → React tự gọi cleanup → controller.abort() → request bị huỷ
+0.5s → fetch ném AbortError → catch bắt được → bỏ qua, không setState
+(2.0s → nếu KHÔNG có abort, đây là lúc data về, nhưng component đã biến mất từ lâu → lỗi)
