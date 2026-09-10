@@ -1,52 +1,81 @@
-// import { navigateToForbidden } from "../utils/forbidden";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Product() {
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getPosts = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
-      );
+  const keyword = searchParams.get("query") || "";
 
-      if (!response.ok) {
-        return navigate("/404");
+  const handleChangeInputSearch = (e) => {
+    const value = e.target.value;
+    setSearchParams(value ? { query: value } : {});
+  };
+
+  // Chỉ gọi API 1 lần khi mount
+  useEffect(() => {
+    const controller = new AbortController(); // cái này để hủy request khi component unmount
+
+    const getPosts = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts",
+          { signal: controller.signal },
+        );
+
+        if (!response.ok) {
+          navigate("/404");
+          return;
+        }
+
+        const data = await response.json();
+        setAllPosts(data);
+      } catch (err) {
+        if (err.name !== "AbortError") console.error(err);
+      } finally {
+        setIsLoading(false);
       }
-      const data = await response.json();
-      setPosts(data);
-      setIsLoading(false);
     };
+
     getPosts();
+
+    return () => controller.abort();
   }, [navigate]);
 
-  // const status = false;
-
-  // if (!status) {
-  //   return navigateToForbidden();
-  // }
+  // Lọc theo keyword ở client
+  const posts = keyword
+    ? allPosts.filter((post) =>
+        post.title.toLowerCase().includes(keyword.toLowerCase()),
+      )
+    : allPosts;
 
   return (
     <div>
+      <h1>Danh sách sản phẩm</h1>
+      <div className="mb-3">
+        <input
+          type="search"
+          placeholder="Tìm kiếm sản phẩm..."
+          className="form-control"
+          value={keyword}
+          onChange={handleChangeInputSearch}
+        />
+      </div>
       {isLoading ? (
         <p>...Loading</p>
       ) : (
-        <>
-          <h1>Danh sách sản phẩm</h1>
-          <ul>
-            {posts.map((post) => (
-              <li key={post.id}>
-                <h3>
-                  <Link to={`/products/${post.id}`}>{post.title}</Link>
-                </h3>
-                <hr />
-              </li>
-            ))}
-          </ul>
-        </>
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <h3>
+                <Link to={`/products/${post.id}`}>{post.title}</Link>
+              </h3>
+              <hr />
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
