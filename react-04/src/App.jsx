@@ -12,6 +12,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Users from "./pages/Users";
 import BestSeller from "./pages/BestSeller/BestSeller";
 import BestSellerMonth from "./pages/BestSeller/BestSellerMonth";
+import AuthMiddleware from "./middlewares/AuthMiddleware";
+import Auth from "./pages/Auth/Auth";
 
 function App() {
   return (
@@ -24,7 +26,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/products">
+            <Route path="/auth">
+              <Route path="login" element={<Auth />} />
+            </Route>
+            <Route path="/products" element={<AuthMiddleware />}>
               <Route index element={<Product />} />
               <Route path=":id" element={<ProductDetail />} />
               <Route path="best-seller">

@@ -7,3 +7,7 @@
 /lien-he ==> Liên hệ ==> Contact
 
 ```
+
+## Bảo vệ Router
+
+Request ==> Middleware ==> Route ==> Component
