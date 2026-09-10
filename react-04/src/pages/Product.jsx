@@ -7,6 +7,8 @@ export default function Product() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  // navigate là một hook của react-router-dom, dùng để điều hướng đến 1 route khác
+
   const keyword = searchParams.get("query") || "";
 
   const handleChangeInputSearch = (e) => {
