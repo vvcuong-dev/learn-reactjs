@@ -9,6 +9,7 @@ import ThankYou from "./pages/ThankYou";
 import Forbidden from "./pages/Forbidden";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Product />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/users" element={<Users />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/403" element={<Forbidden />} />
