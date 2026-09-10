@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Menu from "./components/Menu";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Product from "./pages/Product";
@@ -14,39 +13,34 @@ import BestSeller from "./pages/BestSeller/BestSeller";
 import BestSellerMonth from "./pages/BestSeller/BestSellerMonth";
 import AuthMiddleware from "./middlewares/AuthMiddleware";
 import Auth from "./pages/Auth/Auth";
+import MainLayout from "./layouts/MainLayout";
+import AuthLayout from "./layouts/AuthLayout";
 
 function App() {
   return (
-    <div className="container py-4">
-      <div className="row">
-        <div className="col-3">
-          <Menu />
-        </div>
-        <div className="col-9">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/auth">
-              <Route path="login" element={<Auth />} />
-            </Route>
-            <Route path="/products" element={<AuthMiddleware />}>
-              <Route index element={<Product />} />
-              <Route path=":id" element={<ProductDetail />} />
-              <Route path="best-seller">
-                <Route index element={<BestSeller />} />
-                <Route path="month" element={<BestSellerMonth />} />
-              </Route>
-            </Route>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<AuthMiddleware />}>
+          <Route index element={<Product />} />
+          <Route path=":id" element={<ProductDetail />} />
+          <Route path="best-seller">
+            <Route index element={<BestSeller />} />
+            <Route path="month" element={<BestSellerMonth />} />
+          </Route>
+        </Route>
 
-            <Route path="/users" element={<Users />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/thank-you" element={<ThankYou />} />
-            <Route path="/403" element={<Forbidden />} />
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
+        <Route path="/users" element={<Users />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/403" element={<Forbidden />} />
+      </Route>
+      <Route path="/auth" element={<AuthLayout />}>
+        <Route path="login" element={<Auth />} />
+      </Route>
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
   );
 }
 
