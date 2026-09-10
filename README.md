@@ -10,6 +10,10 @@
 
 5. [useDeferredValue](#usedeferredvalue)
 
+6. [React Router](#react-router)
+
+7. [useNavigate](#usenavigate)
+
 ## useImperativeHandle
 
 ### Vấn đề
@@ -145,3 +149,25 @@ useTransition:
 - tìm kiếm/ lọc dữ liệu lớn theo thời gian thực
 - render danh sách lớn, biểu đồ, bảng dữ liệu phụ thuộc vào input người dùng
 - khi giá trị đến từ props hoặc một state bạn không trực tiếp set (nên không thể dùng useTransition)
+
+## React Router
+
+### Vấn đề
+
+- Mặc định, một ứng dụng React chỉ là một trang duy nhất (SPA - Single Page Application). Nếu không có gì hỗ trợ, bạn không thể có nhiều "trang" khác nhau (như /home, /about, /user/1) mà chỉ dựa vào việc thay đổi state để hiển thị component khác nhau — điều này dẫn tới:
+
+- URL không phản ánh đúng nội dung đang hiển thị (người dùng không share link được, F5 bị mất trạng thái).
+- Không có nút Back/Forward hoạt động đúng như web truyền thống.
+- Khó tổ chức code khi ứng dụng có nhiều "trang" khác nhau.
+
+React Router ra đời để giải quyết vấn đề này — nó cho phép bạn "map" URL với các component tương ứng, đồng thời vẫn giữ trải nghiệm SPA (không tải lại toàn trang).
+
+### React Router là gì?
+
+react-router-dom là thư viện phổ biến nhất để định tuyến (routing) trong ứng dụng React. Nó cho phép:
+
+- Điều hướng giữa các "trang" (thực chất là các component) mà không cần tải lại trình duyệt.
+- Đồng bộ URL với UI đang hiển thị.
+- Truyền dữ liệu qua URL (params, query string).
+- Bảo vệ route (route yêu cầu đăng nhập, phân quyền...).
+- Lazy load từng route để tối ưu hiệu năng.
