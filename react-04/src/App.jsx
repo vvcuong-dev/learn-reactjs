@@ -10,6 +10,8 @@ import Forbidden from "./pages/Forbidden";
 import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import Users from "./pages/Users";
+import BestSeller from "./pages/BestSeller/BestSeller";
+import BestSellerMonth from "./pages/BestSeller/BestSellerMonth";
 
 function App() {
   return (
@@ -22,8 +24,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Product />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/products">
+              <Route index element={<Product />} />
+              <Route path=":id" element={<ProductDetail />} />
+              <Route path="best-seller">
+                <Route index element={<BestSeller />} />
+                <Route path="month" element={<BestSellerMonth />} />
+              </Route>
+            </Route>
+
             <Route path="/users" element={<Users />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/thank-you" element={<ThankYou />} />
