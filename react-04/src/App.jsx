@@ -4,12 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NotFound from "./pages/NotFound";
 
 import { PublicRouter } from "./routes/publicRouter";
-import { privateRouter } from "./routes/PrivateRouter";
+import { PrivateRouter } from "./routes/PrivateRouter";
 
 function App() {
   return (
     <Routes>
-      {privateRouter()}
+      {PrivateRouter()}
       {PublicRouter()}
       <Route path="/*" element={<NotFound />} />
     </Routes>
