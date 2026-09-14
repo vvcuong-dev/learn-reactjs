@@ -8,6 +8,7 @@ import BestSeller from "./pages/BestSeller/BestSeller";
 import BestSellerMonth from "./pages/BestSeller/BestSellerMonth";
 import AuthMiddleware from "./middlewares/AuthMiddleware";
 import Auth from "./pages/Auth/Auth";
+import ScrollTop from "./components/ScrollTop";
 
 function App() {
   const routes = [
@@ -53,7 +54,12 @@ function App() {
   ];
 
   const elements = useRoutes(routes);
-  return elements;
+  return (
+    <>
+      <ScrollTop />
+      {elements}
+    </>
+  );
 }
 
 export default App;
