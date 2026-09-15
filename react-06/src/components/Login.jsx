@@ -4,19 +4,19 @@ export default function Login() {
   const {
     register, // đăng ký element input với react-hook-form
     handleSubmit, // sẽ thực hiện validate, nếu validate thành công thì gọi hàm onSubmit, nếu validate thất bại thì sẽ hiển thị lỗi validation
-    formState: { errors }, // lấy ra các lỗi validation của form
+    formState: { errors, isValid }, // lấy ra các lỗi validation của form
   } = useForm({
     criteriaMode: "firstError", // chỉ hiển thị lỗi đầu tiên của mỗi element
     mode: "onSubmit",
     defaultValues: {
-      email: "",
+      email: "cuongvu",
       password: "",
     },
   });
 
-  const onSubmit = (data) => {
-    console.log("Form submitted", data);
-  };
+  const onSubmit = () => {};
+
+  console.log("isValid:", isValid);
 
   return (
     <div className="w-50 mx-auto">
@@ -37,9 +37,6 @@ export default function Login() {
               //   console.log("Email changed:", e.target.value);
               // },
             })}
-            onBlur={(e) => {
-              console.log("Email changed:", e.target.value);
-            }}
           />
           {errors.email && (
             <div className="text-red-500 text-sm mt-1">
@@ -96,4 +93,16 @@ export default function Login() {
  * - onBlur: sẽ thực hiện validate mỗi khi element có sự kiện blur (người dùng click ra ngoài element).
  * - onTouch: sẽ thực hiện validate cho lần blur đầu tiên (người dùng click ra ngoài element) và sau đó sẽ validate cho mỗi lần onChange element.
  * - all: sẽ thực hiện validate khi blur và change event.
+ */
+
+/**
+ * # formState:
+ *
+ * - errors: trả về một object chứa lỗi, và key của object tương ứng với name mà chúng ta truyền vào hàm Register. Nếu trường hợp không có lỗi nào thì sẽ trả về object rỗng.
+ * - isDirty: so sánh data inpit hiện tại với defaultValue và trả về true nếu value hiện tại khác với defaultValue (dùng để show pop-up khi user chỉnh sửa nhưng chưa submit form). Ví dụ: tình huống user nhập dữ liệu vào form nhưng chưa submit, khi user muốn thoát khỏi trang thì sẽ hiển thị pop-up cảnh báo.
+ * - isSubmmitting: trả về true khi form đang trong quá trình submit và false khi form đã submit xong.
+ * - isSubmitted: trả về true khi form đã submit và false khi form chưa submit.
+ * - isSubmitCount: trả về số lần form đã submit.
+ * - isValid: trả về true nếu form hợp lệ và false nếu form không hợp lệ.
+ * - isValidating: trả về true nếu form đang trong quá trình validate và false khi form đã validate xong.
  */
