@@ -3,20 +3,31 @@ import { useForm } from "react-hook-form";
 export default function Login() {
   const {
     register, // đăng ký element input với react-hook-form
+    // watch, // theo dõi sự thay đổi của element input
+    reset, // reset lại giá trị của form về defaultValue
     handleSubmit, // sẽ thực hiện validate, nếu validate thành công thì gọi hàm onSubmit, nếu validate thất bại thì sẽ hiển thị lỗi validation
     formState: { errors, isValid }, // lấy ra các lỗi validation của form
   } = useForm({
     criteriaMode: "firstError", // chỉ hiển thị lỗi đầu tiên của mỗi element
     mode: "onSubmit",
     defaultValues: {
-      email: "cuongvu",
+      email: "",
       password: "",
+      accountType: "0",
     },
   });
 
-  const onSubmit = () => {};
+  const onSubmit = (data) => {
+    console.log("data:", data);
+    reset();
+  };
 
   console.log("isValid:", isValid);
+  // const watchAllFields = watch(); // theo dõi sự thay đổi của tất cả các element input
+
+  // useEffect(() => {
+  //   console.log("Hello watchAllFields:", watchAllFields);
+  // }, [watchAllFields]);
 
   return (
     <div className="w-50 mx-auto">
@@ -65,6 +76,34 @@ export default function Login() {
               {errors.password.message}
             </div>
           )}
+        </div>
+        <div className="mb-3">
+          <label>Loại tài khoản</label>
+          <div className="relative">
+            <select
+              className="appearance-none border border-gray-300 rounded-md p-2 pr-8 w-full bg-white text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+              {...register("accountType", {
+                required: "Loại tài khoản là bắt buộc",
+              })}
+            >
+              <option value="0">Chọn loại tài khoản</option>
+              <option value="user">Người dùng</option>
+              <option value="admin">Quản trị viên</option>
+            </select>
+            <svg
+              className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
         </div>
         <button
           type="submit"
