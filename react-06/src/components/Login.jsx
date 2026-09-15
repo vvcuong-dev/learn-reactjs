@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 export default function Login() {
   const {
     register, // đăng ký element input với react-hook-form
-    handleSubmit, // xử lý submit form
+    handleSubmit, // sẽ thực hiện validate, nếu validate thành công thì gọi hàm onSubmit, nếu validate thất bại thì sẽ hiển thị lỗi validation
     formState: { errors }, // lấy ra các lỗi validation của form
   } = useForm({
     criteriaMode: "firstError", // chỉ hiển thị lỗi đầu tiên của mỗi element
@@ -18,7 +18,6 @@ export default function Login() {
     console.log("Form submitted", data);
   };
 
-  console.log("Errors", errors);
   return (
     <div className="w-50 mx-auto">
       <h1 className="text-2xl font-bold">Login</h1>
@@ -33,15 +32,14 @@ export default function Login() {
             id="email"
             {...register("email", {
               required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-              minLength: {
-                value: 5,
-                message: "Email must be at least 5 characters",
-              },
+              // validate
+              // onChange: (e) => {
+              //   console.log("Email changed:", e.target.value);
+              // },
             })}
+            onBlur={(e) => {
+              console.log("Email changed:", e.target.value);
+            }}
           />
           {errors.email && (
             <div className="text-red-500 text-sm mt-1">
