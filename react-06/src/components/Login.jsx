@@ -6,6 +6,10 @@ export default function Login() {
     // watch, // theo dõi sự thay đổi của element input
     reset, // reset lại giá trị của form về defaultValue
     setError, // set lỗi cho element input (thường dùng khi validate phía server trả về lỗi)
+    setValue, // set giá trị cho element input (thường dùng khi muốn set giá trị mặc định cho form)
+    setFocus, // set focus cho element input (thường dùng khi muốn set focus cho form)
+    getValues, // lấy giá trị của form (thường dùng khi muốn lấy giá trị của form để submit lên server)
+    trigger, // trigger validate cho element input (thường dùng khi muốn validate form trước khi submit)
     handleSubmit, // sẽ thực hiện validate, nếu validate thành công thì gọi hàm onSubmit, nếu validate thất bại thì sẽ hiển thị lỗi validation
     formState: { errors, isValid }, // lấy ra các lỗi validation của form
   } = useForm({
@@ -32,7 +36,6 @@ export default function Login() {
     reset();
   };
 
-  console.log("isValid:", isValid);
   // const watchAllFields = watch(); // theo dõi sự thay đổi của tất cả các element input
 
   // useEffect(() => {
@@ -40,7 +43,7 @@ export default function Login() {
   // }, [watchAllFields]);
 
   return (
-    <div className="w-50 mx-auto">
+    <div className="w-70 mx-auto">
       <h1 className="text-2xl font-bold">Login</h1>
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
@@ -115,12 +118,52 @@ export default function Login() {
             </svg>
           </div>
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Submit
-        </button>
+        <div className="grid gap-2">
+          <button
+            type="button"
+            className="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              setValue("email", "admin@gmail.com");
+            }}
+          >
+            Set Value
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              setFocus("password");
+            }}
+          >
+            Set Focus
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              console.log(getValues(["email", "password"]));
+              setFocus("password");
+            }}
+          >
+            Get Values
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              trigger("email");
+              trigger("password");
+            }}
+          >
+            Trigger Validation
+          </button>
+        </div>
       </form>
     </div>
   );
