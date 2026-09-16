@@ -22,25 +22,21 @@ export default function Login() {
     },
   });
 
-  const onSubmit = ({ email, password }) => {
-    if (email !== "admin@gmail.com" || password !== "123456") {
-      setError("email", {
-        type: "server",
-        message: "Email hoặc mật khẩu không đúng",
-      });
-      return;
-    }
+  const onSubmit = (data) => {
+    // if (email !== "admin@gmail.com" || password !== "123456") {
+    //   setError("email", {
+    //     type: "server",
+    //     message: "Email hoặc mật khẩu không đúng",
+    //   });
+    //   return;
+    // }
 
-    alert("Đăng nhập thành công");
+    // alert("Đăng nhập thành công");
 
-    reset();
+    // reset();
+
+    console.log("Form data:", data);
   };
-
-  // const watchAllFields = watch(); // theo dõi sự thay đổi của tất cả các element input
-
-  // useEffect(() => {
-  //   console.log("Hello watchAllFields:", watchAllFields);
-  // }, [watchAllFields]);
 
   return (
     <div className="w-70 mx-auto">
@@ -48,18 +44,44 @@ export default function Login() {
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
+            Username
+          </label>
+          <input
+            type="text"
+            className="form-control border border-gray-300 rounded-md p-2 w-full"
+            id="username"
+            {...register("username", {
+              required: "Username is required",
+              minLength: {
+                value: 3,
+                message: "Username must be at least 3 characters",
+              },
+              maxLength: {
+                value: 20,
+                message: "Username must be at most 20 characters",
+              },
+            })}
+          />
+          {errors.username && (
+            <div className="text-red-500 text-sm mt-1">
+              {errors.username.message}
+            </div>
+          )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
             Email address
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control border border-gray-300 rounded-md p-2 w-full"
             id="email"
             {...register("email", {
               required: "Email is required",
-              // validate
-              // onChange: (e) => {
-              //   console.log("Email changed:", e.target.value);
-              // },
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address",
+              },
             })}
           />
           {errors.email && (
@@ -82,6 +104,12 @@ export default function Login() {
                 value: 6,
                 message: "Password must be at least 6 characters",
               },
+              pattern: {
+                value:
+                  /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                message:
+                  "Password must contain at least one uppercase letter, one number, and one special character",
+              },
             })}
           />
           {errors.password && (
@@ -97,6 +125,9 @@ export default function Login() {
               className="appearance-none border border-gray-300 rounded-md p-2 pr-8 w-full bg-white text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               {...register("accountType", {
                 required: "Loại tài khoản là bắt buộc",
+                validate: (value) => {
+                  console.log("Selected account type:", value);
+                },
               })}
             >
               <option value="0">Chọn loại tài khoản</option>
@@ -120,7 +151,7 @@ export default function Login() {
         </div>
         <div className="grid gap-2">
           <button
-            type="button"
+            type="submit"
             className="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Submit
@@ -155,7 +186,7 @@ export default function Login() {
           </button>
           <button
             type="button"
-            className="btn btn-primary bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+            className="btn btn-primary bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               trigger("email");
               trigger("password");
