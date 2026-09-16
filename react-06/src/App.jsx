@@ -1,7 +1,11 @@
 // import Login from "./components/Login";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 
 function App() {
   const schema = object({
@@ -15,11 +19,13 @@ function App() {
     password: string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters"),
+    accountType: string().required("Vui lòng chọn loại tài khoản"),
   });
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     criteriaMode: "firstError", // chỉ hiển thị lỗi đầu tiên của mỗi element
@@ -28,7 +34,7 @@ function App() {
     defaultValues: {
       email: "",
       password: "",
-      accountType: "0",
+      accountType: "",
     },
   });
 
@@ -89,6 +95,33 @@ function App() {
         </div>
         {errors.password && (
           <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+        )}
+        <div className="mb-3">
+          <FormControl fullWidth>
+            <InputLabel id="account-type-label">Loại tài khoản</InputLabel>
+            <Controller
+              control={control}
+              name="accountType"
+              render={({ field: { onChange, value } }) => (
+                <Select
+                  labelId="account-type-label"
+                  id="demo-simple-select"
+                  value={value ?? ""}
+                  label="Loại tài khoản"
+                  onChange={onChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              )}
+            />
+          </FormControl>
+        </div>
+        {errors.accountType && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.accountType.message}
+          </p>
         )}
         <div>
           <button
