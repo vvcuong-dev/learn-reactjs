@@ -5,6 +5,7 @@ export default function Login() {
     register, // đăng ký element input với react-hook-form
     // watch, // theo dõi sự thay đổi của element input
     reset, // reset lại giá trị của form về defaultValue
+    setError, // set lỗi cho element input (thường dùng khi validate phía server trả về lỗi)
     handleSubmit, // sẽ thực hiện validate, nếu validate thành công thì gọi hàm onSubmit, nếu validate thất bại thì sẽ hiển thị lỗi validation
     formState: { errors, isValid }, // lấy ra các lỗi validation của form
   } = useForm({
@@ -17,8 +18,17 @@ export default function Login() {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log("data:", data);
+  const onSubmit = ({ email, password }) => {
+    if (email !== "admin@gmail.com" || password !== "123456") {
+      setError("email", {
+        type: "server",
+        message: "Email hoặc mật khẩu không đúng",
+      });
+      return;
+    }
+
+    alert("Đăng nhập thành công");
+
     reset();
   };
 
@@ -144,4 +154,24 @@ export default function Login() {
  * - isSubmitCount: trả về số lần form đã submit.
  * - isValid: trả về true nếu form hợp lệ và false nếu form không hợp lệ.
  * - isValidating: trả về true nếu form đang trong quá trình validate và false khi form đã validate xong.
+ */
+
+/**
+ * # SetError và clearError: là hai hàm trong react-hook-form dùng để quản thủ công trạng thái lỗi của các field trong form
+ *
+ * ## setError:
+ *  - dùng để gán lỗi thủ công cho một field, kể cả validatation tự nhiên (theo rules bạn khai báo) không phát hiện ra lỗi đó. Thường dùng khi:
+ *    - Validate phía server trả về lỗi (VD: "Email đã tồn tại") và bạn muốn hiển thị lỗi đó lên đúng field tương ứng.
+ *    - Có logic validate phức tạp, liên quan nhiều field, không thể diễn tả bằng rules thông thường.
+ *
+ * - VD: setError("email", { type: "server", message: "Email đã tồn tại" });
+ *
+ * - Tham số gồm: tên field, object { typem message }, và tùy chọn thứ 3 để shouldFocus (nếu true thì focus vào field đó).
+ *
+ * ## clearError:
+ * - dùng để xóa lỗi thủ công của một hoặc nhiều field (hoặc toàn bộ form), thường dùng khi:
+ *   - bạn muốn reset lỗi trước khi submit lịa
+ *   - sau khi user sửa dữ liệu và bạn muốn xóa lỗi cũ
+ *
+ *
  */
