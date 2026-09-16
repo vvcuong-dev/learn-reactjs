@@ -82,6 +82,20 @@ export default function Login() {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Invalid email address",
               },
+              validate: async (email) => {
+                if (!email) return "Email is required";
+
+                const respone = await fetch(
+                  `https://jsonplaceholder.typicode.com/users?email=${email}`,
+                );
+                const data = await respone.json();
+
+                if (data.length > 0) {
+                  return "Email already exists";
+                }
+
+                return true;
+              },
             })}
           />
           {errors.email && (
