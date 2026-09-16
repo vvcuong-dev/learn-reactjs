@@ -30,6 +30,6 @@ Hook: useDispatch, useSelector
 - Store: Nơi lưu trữ toàn bộ state của ứng dụng. Chỉ có một store duy nhất trong app.
 - State: Dữ liệu hiện tại của ứng dụng, được lưu trong store.
 - Action: Là một object mô tả một sự kiện muốn xảy ra trong ứng dụng.
-- Dispatch: Là phương thức để gửi action đến store.
 - Reducer: Là một hàm nhận state hiện tại và action, trả về state mới
-- Selector: Là một hàm giúp lấy dữ liệu từ state trong store, thường được sử dụng với hook useSelector.
+- Selector: dùng để đọc (lấy) dữ liệu từ Redux store vào trong component.
+- Dispatch: dùng để gửi action nhằm thay đổi state.
