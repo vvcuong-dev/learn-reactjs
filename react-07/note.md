@@ -60,3 +60,17 @@ Lợi ích:
 - Không lặp code, không gõ sai type (typo).
 - Tập trung logic tạo action ở một chỗ, dễ maintain.
 - Có thể xử lý thêm logic trước khi trả action (ví dụ sinh id, timestamp...).
+
+# Redux Middleware
+
+- là một lớp trung gian nằm giữa lúc bạn dispatch(action) và lúc action đó thực sự đến được reducer. Nó cho phép bạn chặn acion lại để làm gì đó trước khi (hoặc thay vì) để nó đi tiếp.
+
+Luồng khi có middleware: dispatch(action) → Middleware 1 → Middleware 2 → ... → Reducer → Store cập nhật
+
+=> không có middleware, action đi thẳng từ dispatch vào reducer. Có middleware, nó phải đi qua các middleware trước khi đến reducer.
+
+- Dùng để làm gì?
+  - Xử lý bất đồng bộ (async): gọi API, sau đó mới dispatch ation thật (Redux Toolkit dùng redux-thunk, redux-saga,...)
+  - Logging: ghi log action, state trước và sau khi reducer xử lý.
+  - Xử lý lỗi tập trung: gửi lỗi lên hệ thống theo dõi
+  - Chặn action: ví dụ kiểm tra quyền trước khi cho phép action đi tiếp.
