@@ -33,3 +33,30 @@ Hook: useDispatch, useSelector
 - Reducer: Là một hàm nhận state hiện tại và action, trả về state mới
 - Selector: dùng để đọc (lấy) dữ liệu từ Redux store vào trong component.
 - Dispatch: dùng để gửi action nhằm thay đổi state.
+
+- Action Creater: là một hàm trong Redux dùng để tạo ra (return) một action object. thay vì bạn phải tự viết tay object đó mỗi lần.
+
+Action là gì?
+
+- Action là object mô tả "chuyện gì vừa xảy ra", bắt buộc có field "type": { type: "todo/addTodo", payload: "Học React Hook Form" }
+
+Action Creator:
+
+- thay vì viết tay object trên mỗi lần dispatch, bạn viết một hàm trả về nó:
+
+// action creator
+function addTodo(text) {
+return {
+type: "todo/addTodo",
+payload: text,
+};
+}
+
+// dùng
+dispatch(addTodo("Học React Hook Form"));
+
+Lợi ích:
+
+- Không lặp code, không gõ sai type (typo).
+- Tập trung logic tạo action ở một chỗ, dễ maintain.
+- Có thể xử lý thêm logic trước khi trả action (ví dụ sinh id, timestamp...).

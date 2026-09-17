@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../redux/actions/couterAction";
 
 function Counter() {
   const count = useSelector((state) => state.counter.count);
@@ -6,10 +7,10 @@ function Counter() {
   const dispatch = useDispatch();
 
   const handleIncrement = () => {
-    dispatch({ type: "counter/increment" });
+    dispatch(increment());
   };
   const handleDecrement = () => {
-    dispatch({ type: "counter/decrement" });
+    dispatch(decrement());
   };
 
   return (

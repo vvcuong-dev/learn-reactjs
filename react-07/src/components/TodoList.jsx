@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { todoAdd, todoRemove } from "../redux/actions/todoAction";
 
 export default function TodoList() {
   const todoSchema = z.object({
@@ -24,12 +25,14 @@ export default function TodoList() {
   });
 
   const onSubmit = (data) => {
-    dispatch({ type: "todoList/add", payload: data.todo });
+    dispatch(todoAdd(data.todo));
     console.log(data);
     reset();
   };
 
-  console.log("errors", errors);
+  const handleRemove = (index) => {
+    dispatch(todoRemove(index));
+  };
 
   return (
     <div className="w-120 h-100 mx-auto mt-8 p-4 bg-cyan-100 rounded shadow">
@@ -38,7 +41,15 @@ export default function TodoList() {
       </h1>
       <ul className="list-disc pl-5 mb-5">
         {todoList.map((todo, index) => (
-          <li key={index}>{todo}</li>
+          <div className="flex items-center justify-between" key={index}>
+            <li>{todo}</li>
+            <span
+              className="text-red-500 cursor-pointer text-xl p-1"
+              onClick={() => handleRemove(index)}
+            >
+              x
+            </span>
+          </div>
         ))}
       </ul>
       <hr />
