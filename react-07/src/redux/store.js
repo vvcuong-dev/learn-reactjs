@@ -1,19 +1,11 @@
-import { legacy_createStore as createStore } from "redux";
+import { legacy_createStore as createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
+import { counterReducer } from "./reducers/counterReducer";
+import { todoListReducer } from "./reducers/todoListReducer";
 
-const initialState = {
-  count: 0,
-};
-
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "counter/increment":
-      return { ...state, count: state.count + 1 };
-    case "counter/decrement":
-      return { ...state, count: state.count - 1 };
-    default:
-      return state;
-  }
-};
+const rootReducer = combineReducers({
+  counter: counterReducer,
+  todo: todoListReducer,
+});
 
 export const store = createStore(rootReducer, composeWithDevTools());
