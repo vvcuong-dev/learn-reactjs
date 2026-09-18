@@ -12,9 +12,8 @@ export default function TodoList() {
   });
 
   const todoList = useSelector((state) => state.todo.todoList);
+  const status = useSelector((state) => state.todo.status);
   const dispatch = useDispatch();
-
-  console.log("todoList", todoList);
 
   const {
     register,
@@ -42,24 +41,32 @@ export default function TodoList() {
     dispatch(getTodos());
   }, [dispatch]);
 
+  if (status === "error") {
+    return <div>Error loading todos</div>;
+  }
+
   return (
     <div className="w-120 h-100 mx-auto mt-8 p-4 bg-cyan-100 rounded shadow">
       <h1 className="text-3xl font-bold text-blue-500 text-center mb-5">
         Todo List
       </h1>
-      <ul className="list-disc pl-5 mb-5">
-        {todoList.map((todo, index) => (
-          <div className="flex items-center justify-between" key={index}>
-            <li>{todo.title}</li>
-            <span
-              className="text-red-500 cursor-pointer text-xl p-1"
-              onClick={() => handleRemove(index)}
-            >
-              x
-            </span>
-          </div>
-        ))}
-      </ul>
+      {status === "pending" ? (
+        <div className="text-center text-gray-500">Loading...</div>
+      ) : (
+        <ul className="list-disc pl-5 mb-5">
+          {todoList.map((todo, index) => (
+            <div className="flex items-center justify-between" key={index}>
+              <li>{todo.title}</li>
+              <span
+                className="text-red-500 cursor-pointer text-xl p-1"
+                onClick={() => handleRemove(index)}
+              >
+                x
+              </span>
+            </div>
+          ))}
+        </ul>
+      )}
       <hr />
       <form
         className="flex items-center gap-4 mt-4"

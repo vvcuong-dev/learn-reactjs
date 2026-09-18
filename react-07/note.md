@@ -101,3 +101,9 @@ Lưu ý: Khi làm việc với Redux Toolkit trong React ==> cần cài 2 thư v
 
 - react-redux: kết nối React với Redux store
 - @reduxjs/toolkit: thư viện chính thức của Redux, giúp viết code ngắn
+
+## Async Action
+
+- pending
+- fulfilled
+- rejected
