@@ -76,3 +76,28 @@ Luồng khi có middleware: dispatch(action) → Middleware 1 → Middleware 2 �
   - Chặn action: ví dụ kiểm tra quyền trước khi cho phép action đi tiếp.
 
 Component (UI) ==> dispatch(action) → Middleware 1 → Middleware 2 → ... → Reducer → Store cập nhật
+
+## Redux Toolkit
+
+- Đóng gói các thành phần của Redux (store, reducer, action, middleware) thành một API dễ dùng hơn.
+- Hỗ trợ rất nhiều tính năng
+- Cấu hình, thiết lập nhanh hơn, ngắn hơn
+
+```
+Slice 1:
+    - Reducer: xử lý action, trả về state mới
+    - Action: mô tả sự kiện muốn xảy ra, gửi đến reducer để thay đổi
+    - State: dữ liệu hiện tại của ứng dụng, được lưu trong store.
+    - Action Creator: là một hàm trong Redux dùng để tạo ra (return) một action object. thay vì bạn phải tự viết tay object đó mỗi lần.
+Slice 2:
+    - Reducer: xử lý action, trả về state mới
+    - Action: mô tả sự kiện muốn xảy ra, gửi đến reducer để thay đổi
+    - State: dữ liệu hiện tại của ứng dụng, được lưu trong store.
+    - Action Creator: là một hàm trong Redux dùng để tạo ra (return) một action object. thay vì bạn phải tự viết tay object đó mỗi lần.
+
+```
+
+Lưu ý: Khi làm việc với Redux Toolkit trong React ==> cần cài 2 thư viện
+
+- react-redux: kết nối React với Redux store
+- @reduxjs/toolkit: thư viện chính thức của Redux, giúp viết code ngắn
