@@ -6,8 +6,8 @@ import {
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { counterReducer } from "./reducers/counterReducer";
 import { todoListReducer } from "./reducers/todoListReducer";
-import { fetchDataMiddleware } from "./middlewares/fetchDataMiddleware";
 import { postReducer } from "./reducers/postReducer";
+import { asyncMiddleware } from "./cores/asyncMiddleware";
 
 const rootReducer = combineReducers({
   counter: counterReducer,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   post: postReducer,
 });
 
-const middlewares = [fetchDataMiddleware];
+const middlewares = [asyncMiddleware];
 
 export const store = createStore(
   rootReducer,

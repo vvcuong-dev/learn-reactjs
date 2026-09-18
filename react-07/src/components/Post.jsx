@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchPosts } from "../redux/actions/postActions";
+import { postsMiddleware } from "../redux/middlewares/postsMiddleware";
 
 export default function Post() {
   const posts = useSelector((state) => state.post.posts);
@@ -8,7 +8,7 @@ export default function Post() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(postsMiddleware());
   }, [dispatch]);
 
   if (status === "error") {
@@ -19,7 +19,6 @@ export default function Post() {
     );
   }
 
-  console.log("status", status);
   return (
     <div className="max-w-4xl mx-auto mb-40">
       <h1 className="text-3xl font-bold text-center">Post</h1>
