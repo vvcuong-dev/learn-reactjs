@@ -4,15 +4,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { todoAdd, todoRemove } from "../redux-toolkit/slice/todoSlice.js";
 import { useEffect } from "react";
-import { getTodos } from "../redux-toolkit/slice/todoSlice.js";
+import { getTodos } from "../redux-toolkit/middlewares/todoMiddleware.js";
+import {
+  selectTodoList,
+  selectTodoStatus,
+  selectTodoListCompleted,
+} from "../redux-toolkit/slice/todoSlice.js";
 
 export default function TodoList() {
   const todoSchema = z.object({
     todo: z.string().min(1, "Todo is required"),
   });
 
-  const todoList = useSelector((state) => state.todo.todoList);
-  const status = useSelector((state) => state.todo.status);
+  const todoList = useSelector(selectTodoList);
+  const status = useSelector(selectTodoStatus);
+  const todoListCompleted = useSelector((state) =>
+    selectTodoListCompleted(state),
+  );
   const dispatch = useDispatch();
 
   const {
@@ -67,6 +75,18 @@ export default function TodoList() {
           ))}
         </ul>
       )}
+      <h2>Todo List (Completed)</h2>
+      <ul className="list-disc pl-5 mb-5">
+        {todoListCompleted.map((todo, index) => (
+          <div
+            className="flex items-center justify-between"
+            style={{ textDecoration: "line-through" }}
+            key={index}
+          >
+            <li>{todo.title}</li>
+          </div>
+        ))}
+      </ul>
       <hr />
       <form
         className="flex items-center gap-4 mt-4"
