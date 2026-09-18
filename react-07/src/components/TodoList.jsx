@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { todoAdd, todoRemove } from "../redux/actions/todoActions";
+import { todoAdd, todoRemove } from "../redux-toolkit/slice/todoSlice.js";
 
 export default function TodoList() {
   const todoSchema = z.object({
