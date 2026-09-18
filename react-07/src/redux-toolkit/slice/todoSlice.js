@@ -6,6 +6,9 @@ export const todoSlice = createSlice({
     todoList: ["Learn Redux Toolkit"],
   },
   reducers: {
+    loadTodos: (state, action) => {
+      state.todoList = action.payload;
+    },
     todoAdd: (state, action) => {
       state.todoList.push(action.payload);
     },
@@ -15,4 +18,14 @@ export const todoSlice = createSlice({
   },
 });
 
-export const { todoAdd, todoRemove } = todoSlice.actions;
+export const { todoAdd, todoRemove, loadTodos } = todoSlice.actions;
+
+// Redux Thunk
+
+export const getTodos = () => {
+  return async (dispatch) => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const data = await response.json();
+    dispatch(loadTodos(data));
+  };
+};

@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { todoAdd, todoRemove } from "../redux-toolkit/slice/todoSlice.js";
+import { useEffect } from "react";
+import { getTodos } from "../redux-toolkit/slice/todoSlice.js";
 
 export default function TodoList() {
   const todoSchema = z.object({
@@ -11,6 +13,8 @@ export default function TodoList() {
 
   const todoList = useSelector((state) => state.todo.todoList);
   const dispatch = useDispatch();
+
+  console.log("todoList", todoList);
 
   const {
     register,
@@ -34,6 +38,10 @@ export default function TodoList() {
     dispatch(todoRemove(index));
   };
 
+  useEffect(() => {
+    dispatch(getTodos());
+  }, [dispatch]);
+
   return (
     <div className="w-120 h-100 mx-auto mt-8 p-4 bg-cyan-100 rounded shadow">
       <h1 className="text-3xl font-bold text-blue-500 text-center mb-5">
@@ -42,7 +50,7 @@ export default function TodoList() {
       <ul className="list-disc pl-5 mb-5">
         {todoList.map((todo, index) => (
           <div className="flex items-center justify-between" key={index}>
-            <li>{todo}</li>
+            <li>{todo.title}</li>
             <span
               className="text-red-500 cursor-pointer text-xl p-1"
               onClick={() => handleRemove(index)}
