@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { postsMiddleware } from "../redux/middlewares/postsMiddleware";
+import { demoMiddleware } from "../redux/middlewares/demoMiddleware";
 
 export default function Post() {
   const posts = useSelector((state) => state.post.posts);
@@ -9,6 +10,7 @@ export default function Post() {
 
   useEffect(() => {
     dispatch(postsMiddleware());
+    dispatch(demoMiddleware());
   }, [dispatch]);
 
   if (status === "error") {

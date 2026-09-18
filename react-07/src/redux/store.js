@@ -3,11 +3,11 @@ import {
   combineReducers,
   applyMiddleware,
 } from "redux";
+import { thunk } from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { counterReducer } from "./reducers/counterReducer";
 import { todoListReducer } from "./reducers/todoListReducer";
 import { postReducer } from "./reducers/postReducer";
-import { asyncMiddleware } from "./cores/asyncMiddleware";
 
 const rootReducer = combineReducers({
   counter: counterReducer,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   post: postReducer,
 });
 
-const middlewares = [asyncMiddleware];
+const middlewares = [thunk];
 
 export const store = createStore(
   rootReducer,
