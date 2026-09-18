@@ -74,3 +74,5 @@ Luồng khi có middleware: dispatch(action) → Middleware 1 → Middleware 2 �
   - Logging: ghi log action, state trước và sau khi reducer xử lý.
   - Xử lý lỗi tập trung: gửi lỗi lên hệ thống theo dõi
   - Chặn action: ví dụ kiểm tra quyền trước khi cho phép action đi tiếp.
+
+Component (UI) ==> dispatch(action) → Middleware 1 → Middleware 2 → ... → Reducer → Store cập nhật
