@@ -10,6 +10,9 @@ export function AuthProvider({ children }) {
     const token = getToken();
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsAuthenticated(!!token);
+    /**
+     * Kiểm tra có token trong localStorage hay không. Nếu có, đặt isAuthenticated thành true, ngược lại là false.
+     */
     setIsLoading(false);
   }, []);
 
