@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { requestLogin } from "../../utils/auth";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Login() {
+  const { login } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
 
   // email: john@mail.com password: changeme,
@@ -38,18 +40,12 @@ export default function Login() {
   const handleSubmitForm = async (data) => {
     setIsLoading(true);
     try {
-      const { email, password } = data;
-      const emailTrimmed = email.trim();
-      const passwordTrimmed = password.trim();
-
-      const response = await requestLogin({
-        email: emailTrimmed,
-        password: passwordTrimmed,
-      });
+      const response = await requestLogin(data);
 
       console.log(response);
 
       toast.success("Login successful!");
+      login(response);
       reset();
     } catch {
       toast.error("Login failed. Please check your credentials and try again.");
