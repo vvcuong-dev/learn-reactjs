@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { requestLogin } from "../../utils/auth";
 import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/auth-context";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -68,7 +68,6 @@ export default function Login() {
             <label className="text-gray-700">Email</label>
             <input
               type="text"
-              name="email"
               className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("email")}
             />
@@ -80,7 +79,6 @@ export default function Login() {
             <label className="text-gray-700">Password</label>
             <input
               type="password"
-              name="password"
               className="border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("password")}
             />

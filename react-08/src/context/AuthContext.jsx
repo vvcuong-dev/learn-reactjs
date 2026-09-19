@@ -1,12 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import {
-  getToken,
-  saveToken as saveTokenToStorage,
-  removeToken,
-} from "../utils/auth";
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext(null);
+import { useState, useEffect } from "react";
+import { AuthContext } from "./auth-context";
+import { getToken, saveToken, removeToken } from "../utils/auth";
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,8 +14,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = (tokenData) => {
-    saveTokenToStorage(tokenData);
-    setIsAuthenticated(true); // cập nhật ngay, không cần reload
+    saveToken(tokenData);
+    setIsAuthenticated(true);
   };
 
   const logout = () => {

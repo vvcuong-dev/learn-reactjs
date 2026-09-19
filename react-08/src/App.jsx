@@ -1,7 +1,8 @@
 import Login from "./components/Auth/Login";
 import { useContext } from "react";
-import { AuthContext, AuthProvider } from "./context/AuthContext";
-import Dashboard from "./components/Dashboard/Dahsboard";
+import { AuthContext } from "./context/auth-context";
+import Dashboard from "./components/Dashboard/Dashboard";
+import { AuthProvider } from "./context/AuthContext";
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useContext(AuthContext);
