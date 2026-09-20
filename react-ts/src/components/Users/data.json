@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "style": { "backgroundColor": "#e0f7fa", "borderColor": "#b2ebf2" },
+    "histories": [
+      {
+        "id": 4,
+        "name": "Item 4",
+        "status": true
+      },
+      {
+        "id": 5,
+        "name": "Item 5",
+        "status": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "janesmith@gmail.com",
+    "style": { "backgroundColor": "#f0f0f0", "borderColor": "#ddd" },
+    "histories": [
+      {
+        "id": 1,
+        "name": "Item 1",
+        "status": true
+      },
+      {
+        "id": 2,
+        "name": "Item 2",
+        "status": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Alice Johnson",
+    "email": "alicej@gmail.com",
+    "style": { "backgroundColor": "#e0e0e0", "borderColor": "#ccc" },
+    "histories": [
+      {
+        "id": 6,
+        "name": "Item 6",
+        "status": true
+      },
+      {
+        "id": 7,
+        "name": "Item 7",
+        "status": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Alice hehe",
+    "email": "alicej@gmail.com",
+    "style": { "backgroundColor": "red", "borderColor": "red" },
+    "histories": []
+  },
+  {
+    "id": 5,
+    "name": "Alice haha",
+    "email": "alicej@gmail.com",
+    "style": { "backgroundColor": "blue", "borderColor": "blue" },
+    "histories": []
+  }
+]
