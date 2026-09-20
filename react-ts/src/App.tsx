@@ -1,23 +1,9 @@
-// export default function App({
-//   message,
-// }: {
-//   message: string;
-// }): React.JSX.Element {
-//   return (
-//     <h1 className="text-2xl font-bold text-blue-500 text-center">{message}</h1>
-//   );
-// }
-
-type AppProps = {
+type Props = {
   message: string;
 };
 
-const App: React.FC<AppProps> = ({ message }) => {
-  return (
-    <h1 className="text-2xl font-bold text-blue-500 text-center">
-      Cường vũ: {message}
-    </h1>
-  );
+const App = ({ message = "Hello, World!" }: Props) => {
+  return <div>{message}</div>;
 };
 
 export default App;
