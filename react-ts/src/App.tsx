@@ -1,24 +1,23 @@
-import { useState } from "react";
-import UserAdd from "./components/Users/UserAdd";
-import type { UserFormValues } from "./components/Users/UserAdd";
-import UserList from "./components/Users/UserList";
-import data from "./components/Users/data.json";
-import type { User } from "./components/Users/UserItem";
+// export default function App({
+//   message,
+// }: {
+//   message: string;
+// }): React.JSX.Element {
+//   return (
+//     <h1 className="text-2xl font-bold text-blue-500 text-center">{message}</h1>
+//   );
+// }
 
-export default function App() {
-  const [users, setUsers] = useState<User[]>(data);
+type AppProps = {
+  message: string;
+};
 
-  const handleAddUser = ({ name, email }: UserFormValues) => {
-    setUsers((prev) => [
-      ...prev,
-      { id: Date.now(), name, email, histories: [] },
-    ]);
-  };
-
+const App: React.FC<AppProps> = ({ message }) => {
   return (
-    <div>
-      <UserList users={users} />
-      <UserAdd onAdd={handleAddUser} />
-    </div>
+    <h1 className="text-2xl font-bold text-blue-500 text-center">
+      Cường vũ: {message}
+    </h1>
   );
-}
+};
+
+export default App;
