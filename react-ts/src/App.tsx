@@ -1,60 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type User = {
-  name: string;
-  email: string;
+type Todo = {
+  id: number;
+  title: string;
+  completed: boolean;
 };
 
-function App() {
-  const [form, setForm] = useState<User | undefined | null>();
+export default function App() {
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleChangeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setForm({ ...form, [name]: value } as User);
-  };
+  useEffect((): void => {
+    const getTodos = async (): Promise<void> => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/todos",
+        );
+        const data = await response.json();
+        setTodos(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+      }
+    };
 
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("Form submitted:", form);
-  };
+    getTodos();
+  }, []);
 
   return (
     <div>
-      <form
-        className="flex flex-col gap-4 p-4 border rounded-md shadow-md"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col gap-2">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="name..."
-            className="border rounded-md p-2"
-            onChange={handleChangeValue}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="email..."
-            className="border rounded-md p-2"
-            onChange={handleChangeValue}
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        >
-          Submit
-        </button>
-      </form>
+      <h2>Todo List</h2>
+      {todos.length > 0 ? (
+        <ul>
+          {todos.map((todo: Todo) => (
+            <li key={todo.id}>
+              {todo.title} - {todo.completed ? "Completed" : "Not Completed"}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading todos...</p>
+      )}
     </div>
   );
 }
 
-export default App;
+/**
+ * ReturnType là kiểu dữ liệu được trả về từ một hàm. Nó được sử dụng để lấy kiểu dữ liệu của giá trị trả về của một hàm cụ thể. Trong ví dụ trên, ReturnType<typeof setTimeout> sẽ trả về kiểu dữ liệu của giá trị trả về của hàm setTimeout, đó là một số (number) đại diện cho ID của bộ hẹn giờ.
+ */
