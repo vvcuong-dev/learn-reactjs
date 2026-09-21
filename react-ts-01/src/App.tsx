@@ -1,39 +1,15 @@
-import { useReducer } from "react";
+import { useCallback } from "react";
 
-type State = {
-  count: number;
-};
-
-type Action = {
-  type: "increment" | "decrement";
-  payload?: unknown;
-};
+type HandleClick = (event: React.MouseEvent<HTMLElement>) => void;
 
 export default function App() {
-  const reducer = (state: State, action: Action): State => {
-    switch (action.type) {
-      case "increment":
-        return { ...state, count: state.count + 1 };
-      case "decrement":
-        return { ...state, count: state.count - 1 };
-      default:
-        return state;
-    }
-  };
-  const initialState: State = { count: 0 };
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const handleIncrement = (): void => {
-    dispatch({ type: "increment" });
-  };
-
-  const handleDecrement = (): void => {
-    dispatch({ type: "decrement" });
-  };
+  const handleClick: HandleClick = useCallback((event) => {
+    console.log("Button clicked: ", event);
+  }, []);
 
   return (
     <div>
-      <h1>Count: {state.count}</h1>
+      <h1>Count: 0</h1>
       <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
         <button
           style={{
@@ -42,7 +18,6 @@ export default function App() {
             border: "1px solid blue",
             cursor: "pointer",
           }}
-          onClick={() => handleIncrement()}
         >
           Increment
         </button>
@@ -53,11 +28,45 @@ export default function App() {
             border: "1px solid red",
             cursor: "pointer",
           }}
-          onClick={() => handleDecrement()}
         >
           Decrement
         </button>
       </div>
+      <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
+        <button
+          // onClick={() => handleClick("Hello, World!")}
+          style={{
+            marginTop: "2rem",
+            padding: "0.5rem 1rem",
+            backgroundColor: "lightgray",
+            border: "1px solid gray",
+            cursor: "pointer",
+          }}
+        >
+          Click me 1
+        </button>
+        <button
+          onClick={handleClick}
+          style={{
+            marginTop: "2rem",
+            padding: "0.5rem 1rem",
+            backgroundColor: "lightgreen",
+            border: "1px solid gray",
+            cursor: "pointer",
+          }}
+        >
+          Click me 2
+        </button>
+      </div>
+      <p onClick={handleClick}>
+        lorem1000 ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
     </div>
   );
 }
