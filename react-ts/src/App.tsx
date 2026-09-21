@@ -1,49 +1,37 @@
-import { useEffect, useState } from "react";
-
-type Todo = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import { useRef } from "react";
 
 export default function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const valueRef = useRef<string[]>([]);
 
-  useEffect((): void => {
-    const getTodos = async (): Promise<void> => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/todos",
-        );
-        const data = await response.json();
-        setTodos(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching todos:", error);
-      }
-    };
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    getTodos();
-  }, []);
+    const value: string = inputRef.current?.value || "";
+
+    console.log("Current values:", valueRef.current); // Log the current array of values
+
+    valueRef.current.push(value || "");
+
+    console.log("Updated values:", valueRef.current); // Log the updated array of values
+  };
 
   return (
     <div>
-      <h2>Todo List</h2>
-      {todos.length > 0 ? (
-        <ul>
-          {todos.map((todo: Todo) => (
-            <li key={todo.id}>
-              {todo.title} - {todo.completed ? "Completed" : "Not Completed"}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Loading todos...</p>
-      )}
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 p-4 border rounded-md shadow-md"
+      >
+        <input
+          type="text"
+          placeholder="Enter something..."
+          className="border rounded-md p-2"
+          ref={inputRef}
+        />
+        <button className="bg-blue-500 text-white p-2 rounded-md" type="submit">
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
-
-/**
- * ReturnType là kiểu dữ liệu được trả về từ một hàm. Nó được sử dụng để lấy kiểu dữ liệu của giá trị trả về của một hàm cụ thể. Trong ví dụ trên, ReturnType<typeof setTimeout> sẽ trả về kiểu dữ liệu của giá trị trả về của hàm setTimeout, đó là một số (number) đại diện cho ID của bộ hẹn giờ.
- */
